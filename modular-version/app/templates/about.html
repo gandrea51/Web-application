@@ -1,0 +1,48 @@
+{% extends "layout.html" %}
+{% block title %}About us{% endblock %}
+{% block styles %}<link rel="stylesheet" href="/static/css/about.css">{% endblock %}
+{% block main %}
+
+    <main class="about-main">
+        <article class="roles">
+            <section class="founders">
+                <h2 class="title">John Doe & Jane Smith</h2>
+                <p class="whats">John and Jane are the visionary founders of The Lumina Library. With a passion for books and a commitment to creating a space that fosters knowledge 
+                    and creativity, they laid the foundation for the library's growth. Their goal is to create a welcoming and inclusive environment where everyone, from young readers 
+                    to seasoned researchers, can find a place to learn and grow. They continue to oversee the overall direction of the library, ensuring it remains a sanctuary for 
+                    knowledge and imagination.
+                </p>
+                <image src="/static/images/founders.jpeg" alt="Founders" class="founders-image" loading="lazy">
+            </section>
+            <section class="manager">
+                <h2 class="title">Emily Davis & Michael Johnson</h2>
+                <p class="whats">Emily and Michael manage the day-to-day operations of The Lumina Library. They are responsible for overseeing staff, ensuring the smooth running of 
+                    the library, and managing resources and inventory. Their leadership is instrumental in maintaining a positive and productive atmosphere for both library users and 
+                    staff. With a keen eye for organization and detail, Emily and Michael ensure that every corner of the library operates efficiently and effectively, always striving 
+                    to meet the needs of the community.
+                </p>
+                <image src="/static/images/managers.jpeg" alt="Managers" class="managers-image" loading="lazy">
+            </section>
+            <section class="creator">
+                <h2 class="title">Sophia & Rachel Williams</h2>
+                <p class="whats">Sophia and Rachel are the creative minds behind The Lumina Library’s digital content and community outreach. They create engaging articles, videos, and 
+                    promotional material to keep the library’s audience informed and inspired. Their work includes developing online programs, virtual book clubs, and social media content 
+                    that highlights the library's events and new acquisitions. They are passionate about making the library’s content accessible, educational, and engaging for all users, 
+                    whether they are in the library or accessing it from home.
+                </p>
+                <image src="/static/images/creators.jpeg" alt="Creators" class="creators-image" loading="lazy">
+            </section>
+            <section class="librarian">
+                <h2 class="title">Olivia Brown & Margareth White</h2>
+                <p class="whats">Olivia and Margareth are the heart and soul of The Lumina Library’s daily operations, assisting library users with finding resources, organizing events, and 
+                    providing expert knowledge in various subjects. Their primary focus is on helping patrons locate materials, whether physical or digital, and assisting with any research 
+                    inquiries. Both Olivia and Margareth are passionate about fostering a love for reading and learning within the library community. They also ensure that the library’s collections 
+                    are properly curated and constantly updated, so there is always something new for users to discover.
+                </p>
+                <image src="/static/images/librarians.jpeg" alt="Librarians" class="librarians-image" loading="lazy">
+            </section>
+        </article>
+    </main>
+
+{% endblock %}
+{% block scripts %}<script src="/static/js/about.js"></script>{% endblock %}

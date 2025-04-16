@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+{% block title %}Books{% endblock %}
+{% block styles %}<link rel="stylesheet" href="/static/css/manage.css">{% endblock %}
+{% block main %}
+
+    <header class="manager-header">
+        <h2 class="manager-title">Manage the collection books</h2>
+        <h4 class="manager-subtitle">This way you won't lose anything, and you can only benefit from it.</h4>
+        <a class="manager-area" href="/book/create"><i class="fa fa-solid fa-bars-progress"></i></a>
+    </header>
+
+    <main class="manager-main">
+        <section class="find-search">
+            <h2 class="find-title">Find your book</h2>
+            <p class="find-description">Use the search bar below to quickly find books by their title or author. Simply start typing, and the list will update dynamically.</p>
+            <input type="text" placeholder="Search for the title or author of a book..." aria-label="Search books">
+        </section>
+    
+        <section class="dynamic-list">
+            <h3 class="dynamo-title">Available Books</h3>
+            <p class="dynamo-description">Below is a list of books currently in the collection. Use the search feature to filter results based on your preferences.</p>
+            <ul class="dynamo-items">
+                {% for book in books %}
+                    <li class="dynamo-item">
+                        <section class="details">
+                            <h4 class="book-title">{{ book.title }}</h4>
+                            <p class="book-author"><strong>Author:</strong> {{ book.author }}</p>
+                            <p class="book-keys">{{ book.keywords }}</p>
+                            
+                            <a class="edit-button" href="/book/{{book.id}}/edit">Edit</a>
+                            <a class="delete-button" href="/book/{{book.id}}/drop">Delete</a>
+                        </section>
+                    </li>
+                {% endfor %}
+            </ul>
+        </section>
+    </main>
+
+{% endblock %}
+{% block scripts %}<script src="/static/js/manager.js"></script>{% endblock %}

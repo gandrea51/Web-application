@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+{% block title %}School{% endblock %}
+{% block styles %}<link rel="stylesheet" href="/static/css/manage.css">{% endblock %}
+{% block main %}
+
+    <header class="manager-header">
+        <h2 class="manager-title">Manage the collection of courses</h2>
+        <h4 class="manager-subtitle">This way you won't lose anything, and you can only benefit from it.</h4>
+        <a class="manager-area" href="/school/create"><i class="fa fa-solid fa-bars-progress"></i></a>
+    </header>
+
+    <main class="manager-main">
+        <section class="find-search">
+            <h2 class="find-title">Find your course</h2>
+            <p class="find-description">Use the search bar below to quickly find courses by their name or teacher. Simply start typing, and the list will update dynamically.</p>
+            <input type="text" placeholder="Search for the name or teacher of a course..." aria-label="Search courses">
+        </section>
+    
+        <section class="dynamic-list">
+            <h3 class="dynamo-title">Available Courses</h3>
+            <p class="dynamo-description">Below is a list of courses currently in the collection. Use the search feature to filter results based on your preferences.</p>
+            <ul class="dynamo-items">
+                {% for course in courses %}
+                    <li class="dynamo-item">
+                        <section class="details">
+                            <h4 class="book-title">{{ course.name }}</h4>
+                            <p class="book-author"><strong>Teacher:</strong> {{ course.teacher }}</p>
+                            <p class="book-keys">{{ course.place }}</p>
+                            
+                            <a class="edit-button" href="/school/{{course.id}}/edit">Edit</a>
+                            <a class="delete-button" href="/school/{{course.id}}/drop">Delete</a>
+                        </section>
+                    </li>
+                {% endfor %}
+            </ul>
+        </section>
+    </main>
+
+{% endblock %}
+{% block scripts %}<script src="/static/js/manager.js"></script>{% endblock %}

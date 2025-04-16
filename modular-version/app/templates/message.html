@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+{% block title %}The Message{% endblock %}
+{% block styles %}<link rel="stylesheet" href="/static/css/message.css">{% endblock %}
+{% block main %}
+
+    <header class="header">
+        <h2 class="title">Stay Updated with All Messages</h2>
+        <h4 class="subtitle">Review, manage, and respond to important conversations efficiently</h4>        
+    </header>
+
+    <main class="main">
+        <article class="image">
+            <img src="{{path}}" alt="The message image" loading="lazy" class="image-message">
+        </article>
+
+        <article class="items">
+            {% for message in messages %}
+                <section class="item">
+                    <h5 class="head">{{message.name}} Has Written:</h5>
+                    <p class="body">{{message.message}}</p>
+                    <p class="foot-date">On {{message.created_at}}</p>
+                    
+                    <a class="delete" href="/message/{{message.id}}/drop">Already read</a>
+                </section>
+            {% endfor %}
+        </article>
+
+        <article class="items">
+            {% for question in questions %}
+                <section class="item">
+                    <h5 class="head">{{question.user.name}} Has Written:</h5>
+                    <p class="body"><strong class="object">Object: {{question.data}}</strong> <br>
+                        {{question.question}}</p>
+                    <p class="foot-date">On {{question.created_at}}</p>
+                    
+                    <a href="#" class="answer-button">Answer it</a>
+                </section>
+            {% endfor %}
+        </article>
+
+    </main>
+{% endblock %}
+{% block script %}<script src="/static/js/message.js"></script>{% endblock %}

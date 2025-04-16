@@ -1,0 +1,60 @@
+{% extends "layout.html" %}
+{% block title %}Our books{% endblock %}
+{% block styles %}<link rel="stylesheet" href="/static/css/book.css"><link rel="stylesheet" href="/static/css/genre.css">{% endblock %}
+{% block main %}
+
+    <header class="book-header">
+        <h1 class="book-title">The Lumina Library- Connect with your {{genre}} books anywhere</h1>
+        <h3 class="book-subtitle">Between Life and the Infinite Possibilities</h3>
+        <h5 class="book-motto">sectione into our carefully curated library of literature, knowledge, and imagination. From timeless classics to modern masterpieces, our collection 
+            spans genres, languages, and cultures — a haven for curious minds and passionate readers. <br>
+            Whether you're seeking adventure, research, or quiet reflection, there's a book waiting for you.</h5>
+    </header>
+
+    <main class="book-main">
+        <section class="block-chain">
+            <h4 class="block-title">The Shape of Stories: Understanding Book Genres</h4>
+            <p class="block-description">Book genres are the foundational blueprints that shape the stories we tell and the way we experience them. From the heart-pounding thrill 
+                of mysteries to the boundless wonder of science fiction, genres help readers find the narratives that speak to them most deeply. They serve as both guideposts and 
+                gateways—offering familiarity while allowing room for innovation. This exploration sectiones into the role genres play in literature, how they evolve, and why 
+                they matter, helping readers and writers alike navigate the vast landscape of storytelling.</p>
+        </section>
+
+
+        <article class="block-dynamic">
+            {% for book in books %}
+                <article class="book-item">
+                    <h4 class="book-title">{{ book.title }}</h4>
+                    <h6 class="book-keys">{{ book.keywords }}</h6>
+                    <p class="book-data">
+                        Wrote by <span class="author">{{ book.author }}</span> on 
+                        <span class="date">{{ book.publication_date.strftime('%B %d, %Y') }}</span>
+                    </p>
+                    <button class="book-button" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvas-{{ loop.index }}" aria-controls="offcanvas-{{ loop.index }}">More Info</button>
+                </article>
+
+                <section class="offcanvas offcanvas-end" tabindex="-1" id="offcanvas-{{ loop.index }}" aria-labelledby="offcanvasLabel-{{ loop.index }}">
+                    <section class="offcanvas-header">
+                        <h5 class="offcanvas-title" id="offcanvasLabel-{{ loop.index }}">{{ book.title }} of {{ book.author }}</h5>
+                        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    </section>
+                    <section class="offcanvas-body">
+                        <p class="data"><strong>Publisher:</strong> {{ book.publisher }} <br><br><br>
+                            <strong>Description:</strong> {{ book.description }}</p>
+                        <br><br>
+                        {% if book.copy > 1 %}
+                            <p class="borrow">Unlock a world of knowledge and adventure—borrow a book today and embark on your next 
+                                great journey!</p> <br>
+                            <a href="/borrow/{{book.id}}" class="borrow-book">Borrow now</a>
+                        {% else %}
+                            <p class="no-borrow">This book is currently unavailable for borrowing. Please check back later.</p>
+                        {% endif %}
+                    </section>
+                </section>
+            {% endfor %}
+
+        </article>
+    </main>
+
+{% endblock %}
+{% block scripts %}<script src="/static/js/genre.js"></script>{% endblock %}

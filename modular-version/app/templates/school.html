@@ -1,0 +1,52 @@
+{% extends "layout.html" %}
+{% block title %}Schools{% endblock %}
+{% block styles %}<link rel="stylesheet" href="/static/css/school.css">{% endblock %}
+{% block main %}
+
+    <header class="school-header">
+        <h1 class="school-title">The Lumina Library & Learning Hub</h1>
+        <h3 class="school-subtitle">Where Books Inspire Minds and Courses Ignite Futures</h3>
+    </header>
+
+    <main class="school-main">    
+        <article class="introduction">
+            <p class="description">The Lumina Library & Learning Hub is more than just a place to borrow books—it's a vibrant center for personal growth and lifelong learning. 
+                Alongside a rich and diverse collection of literature, we offer a wide range of expertly curated courses designed to spark curiosity, deepen knowledge, 
+                and empower individuals of all backgrounds. Whether you're diving into a new language, exploring the digital world, or refining your creative skills, 
+                our library connects you with the resources and instructors to guide your journey. Step inside, and discover a space where stories meet studies, 
+                and passion meets progress.</p>
+            
+            <img src="/static/images/course_intro.jpeg" alt="An introduction to the Lumina Library" class="school-intro-img" loading="lazy">
+        </article>
+
+        <section class="two-tier">
+            <article class="advanced">
+                <h3 class="advanced-title">Advanced Courses - {{advanced.name}}</h3>
+                <h4 class="advanced-info">{{advanced.teacher}} - {{advanced.place}}</h4>
+                <p class="advanced-text">Our advanced courses are designed for those looking to deepen their expertise and knowledge in specific fields. 
+                    These courses are led by experienced instructors and offer a blend of theoretical knowledge and practical application.</p>
+                <img src="/static/images/course_advanced.jpeg" alt="Advanced Courses" class="advanced-img" loading="lazy">
+            </article>
+            <article class="german">
+                <h3 class="german-title">German Language Course - {{german.name}}</h3>
+                <h4 class="german-info">{{german.teacher}} - {{german.place}}</h4>
+                <p class="german-text">Join our German language course to enhance your language skills and cultural understanding. 
+                    This course is suitable for all levels, from beginners to advanced learners.</p>
+                <img src="/static/images/course_beginner.jpeg" alt="German Language Course" class="german-img" loading="lazy">
+            </article>
+        </section>
+
+        <article class="discover-invite">
+            <h4 class="invite-title">Ready to Learn Something New?</h4>
+            <p class="invite-paragraph">Step into a world of inspiration at the Lumina Library & Learning Hub! ✨ <br>
+                Explore our diverse collection of courses—whether you're aiming to master a new skill, delve into a fresh passion, or advance your career, there's something here for everyone.
+                Join a community of curious minds and let your learning journey begin today.</p>
+            <a href="/discover" class="invite-link">Find out more</a>
+        </article>
+        
+        {% if current.role != "Client" %}
+            <a class="manager-area" href="/school/manager"><i class="fa fa-solid fa-bars-progress"></i></a>
+        {% endif %}
+    </main>
+
+{% endblock %}

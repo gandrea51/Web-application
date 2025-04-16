@@ -1,0 +1,105 @@
+{% extends "layout.html" %}
+{% block title %}Books{% endblock %}
+{% block styles %}<link rel="stylesheet" href="/static/css/form.css">{% endblock %}
+{% block main %}
+
+    <header class="header-form">
+        <h2 class="title-form">Edit the book {{book.title}}</h2>
+        <h4 class="sub-form">This way you won't lose anything, and you can only benefit from it.</h4>
+    </header>
+
+    <main class="main">
+        <article class="eventual-error-block">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    <section class="errors">
+                        <ul class="messages">
+                            {% for category, message in messages %}
+                                <li class="item">{{ message }}</li>
+                            {% endfor %}
+                        </ul>
+                    </section>
+                {% endif %}
+            {% endwith %}
+        </article>
+
+        <form method="post" action="/book/{{book.id}}/edit" class="form">
+            <section class="form-group">
+                <label for="title" class="form-label">Title</label>
+                <input required type="text" class="form-control" id="title" name="title" value="{{book.title}}" placeholder="Mrs Dalloway">
+                <section id="title" class="form-text">What is the title of the book?</section>
+            </section>
+
+            <section class="form-group">
+                <label for="author" class="form-label">Author</label>
+                <input required type="text" class="form-control" id="author" name="author" value="{{book.author}}" placeholder="Virginia Woolf">
+                <section id="author" class="form-text">Who is the author of the book?</section>
+            </section>
+            
+            <section class="form-group">
+                <label for="genre" class="form-label">Genre</label>
+                <input required type="text" class="form-control" id="genre" name="genre" value="{{book.genre}}" placeholder="Novel">
+                <section id="genre" class="form-text">What is the genre of the book?</section>
+            </section>
+
+            <section class="form-group">
+                <label for="publisher" class="form-label">Publisher</label>
+                <input required type="text" class="form-control" id="publisher" name="publisher" value="{{book.publisher}}" placeholder="Mondadori">
+                <section id="publisher" class="form-text">What is the publisher of the book?</section>
+            </section>
+
+            <section class="form-group">
+                <label for="publication_date" class="form-label">Date of publication</label>
+                <input required type="date" class="form-control" id="publication_date" name="publication_date" value="{{book.publication_date}}" placeholder="2023-10-01">
+                <section id="publication_date" class="form-text">What is the publication date of the book?</section>
+            </section>
+
+            <section class="form-group">
+                <label for="language" class="form-label">Language</label>
+                <select multiple class="form-select" id="language" for="language" name="language" required>
+                    <option value="English">English</option>
+                    <option value="Spanish">Spanish</option>
+                    <option value="French">French</option>
+                    <option value="German">German</option>
+                    <option value="Italian">Italian</option>
+                    <option value="Portuguese">Portuguese</option>
+                  </select>
+                <section id="language" class="form-text">What is the language of the book?</section>
+            </section>
+
+            <section class="form-group">
+                <label for="description" class="form-label">Description</label>
+                <textarea class="form-control" id="description" name="description" rows="4">{{book.description}}</textarea>
+                <section id="description" class="form-text">What is the description of the book?</section>
+            </section>
+
+            <section class="form-group">
+                <label for="keywords" class="form-label">Keywords</label>
+                <textarea class="form-control" id="keywords" name="keywords" rows="2">{{book.keywords}}</textarea>
+                <section id="keywords" class="form-text">What are the keywords of the book?</section>
+            </section>
+
+            <section class="form-group">
+                <label for="position" class="form-label">Position</label>
+                <input required type="text" class="form-control" id="position" name="position" value="{{book.position}}" placeholder="Shelf 1">
+                <section id="position" class="form-text">Where is the book located?</section>
+            </section>
+
+            <section class="form-group">
+                <label for="copy" class="form-label">Copy</label>
+                <input required type="number" class="form-control" id="copy" name="copy" value="{{book.copy}}" min="0" max="100" step="2">
+                <section id="copy" class="form-text">How many copies of the book are available?</section>
+            </section>
+
+            <section class="form-group">
+                <label for="note" class="form-label">Notes</label>
+                <textarea class="form-control" id="note" name="note" rows="2">{{book.note}}</textarea>
+                <section id="note" class="form-text">What are the notes of the book?</section>
+            </section>
+
+            <button type="submit" class="save">Confirm</button>
+        </form>
+    </main>
+
+{% endblock %}
+{% block script %}{% endblock %}

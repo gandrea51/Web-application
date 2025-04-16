@@ -1,0 +1,312 @@
+/* Profile Header Container */
+.profile-header {
+    text-align: center;
+    padding: 40px 20px;
+    background: linear-gradient(to right, #3498db, #8e44ad);
+    color: white;
+    border-radius: 10px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    margin-bottom: 40px;
+}
+
+/* Profile Image Styling */
+.profile-image {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 5px solid #fff;
+    margin-bottom: 20px;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.profile-image:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Profile Name Styling */
+.profile-name {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Profile Subtitle */
+.profile-subtitle {
+    font-size: 1.25rem;
+    font-weight: 400;
+    margin-bottom: 15px;
+    color: rgba(255, 255, 255, 0.85);
+}
+
+/* Profile Motto */
+.profile-motto {
+    font-size: 1rem;
+    font-style: italic;
+    color: rgba(255, 255, 255, 0.75);
+    max-width: 80%;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* Icon Styling in Motto */
+.profile-motto i {
+    margin-right: 10px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .profile-header {
+        padding: 30px 15px;
+    }
+
+    .profile-name {
+        font-size: 1.75rem;
+    }
+
+    .profile-subtitle {
+        font-size: 1.1rem;
+    }
+
+    .profile-motto {
+        font-size: 0.95rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .profile-header {
+        padding: 20px 10px;
+    }
+
+    .profile-name {
+        font-size: 1.5rem;
+    }
+
+    .profile-subtitle {
+        font-size: 1rem;
+    }
+
+    .profile-motto {
+        font-size: 0.9rem;
+    }
+}
+
+/* Profile Main Section */
+.profile-main {
+    padding: 40px 20px;
+    background: linear-gradient(to bottom, #97d2ee, #8f95e7);
+    border-radius: 10px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    color: #333;
+}
+
+/* Container for Bookings */
+.containers {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+/* Individual Booking Item */
+.container {
+    background: linear-gradient(to top, #97d2ee, #8f95e7);
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Hover Effects for the Container */
+.container:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Loan Title (Course Name) */
+.loan-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #db34db;
+    margin-bottom: 10px;
+}
+
+/* Loan Paragraph (Booking Details) */
+.loan-paragraph {
+    font-size: 1rem;
+    color: #666;
+    line-height: 1.6;
+}
+
+/* Request Button (for pending status) */
+.request-to-pay {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 10px 20px;
+    background-color: #e67e22;
+    color: white;
+    font-weight: 500;
+    border-radius: 5px;
+    text-decoration: none;
+    text-align: center;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.request-to-pay:hover {
+    background-color: #d35400;
+    transform: scale(1.05);
+}
+
+/* Different Status Colors for Better Visual Differentiation */
+.loan-paragraph span {
+    font-weight: bold;
+    color: #2c3e50;
+}
+
+/* Status Indicator - Pending */
+.loan-paragraph .pending {
+    color: #f39c12;
+}
+
+/* Status Indicator - Confirmed */
+.loan-paragraph .confirmed {
+    color: #27ae60;
+}
+
+/* Status Indicator - Cancelled */
+.loan-paragraph .cancelled {
+    color: #e74c3c;
+}
+
+/* Empty State when No Bookings */
+.no-bookings {
+    text-align: center;
+    font-size: 1.25rem;
+    color: #7f8c8d;
+    margin-top: 50px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .profile-main {
+        padding: 30px 15px;
+    }
+
+    .containers {
+        grid-template-columns: 1fr;
+    }
+
+    .loan-title {
+        font-size: 1.4rem;
+    }
+
+    .loan-paragraph {
+        font-size: 0.95rem;
+    }
+}
+
+/* FOOTER CONTAINER */
+.profile-footer {
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 3rem;
+    background: linear-gradient(to right, #f8f9fa, #e3f2fd);
+    padding: 3rem 2rem;
+    border-top: 6px solid #0077cc;
+    border-radius: 30px 30px 0 0;
+    box-shadow: 0 -5px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* LEFT SIDE: ASK-QUESTION */
+.ask-question {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: left;
+}
+
+.ask-title {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #0d47a1;
+    margin-bottom: 1rem;
+}
+
+.ask-detail {
+    font-size: 1rem;
+    color: #333;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+}
+
+.ask-image {
+    width: 100%;
+    max-width: 400px;
+    border-radius: 16px;
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
+    object-fit: cover;
+}
+
+/* RIGHT SIDE: FORM */
+.ask-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.contact-form {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 20px;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
+}
+
+.contact-form label {
+    font-weight: 600;
+    color: #1976d2;
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+.contact-form textarea {
+    width: 100%;
+    border-radius: 10px;
+    border: 1px solid #90caf9;
+    padding: 0.75rem;
+    resize: vertical;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.contact-form textarea:focus {
+    border-color: #1565c0;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(21, 101, 192, 0.2);
+}
+
+.form-text {
+    font-size: 0.85rem;
+    color: #555;
+    margin-top: 0.25rem;
+}
+
+/* SUBMIT BUTTON */
+.button-send {
+    margin-top: 1.5rem;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    background-color: #0d47a1;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.button-send:hover {
+    background-color: #1565c0;
+}

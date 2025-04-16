@@ -1,0 +1,102 @@
+{% extends "layout.html" %}
+{% block title %}Courses{% endblock %}
+{% block styles %}<link rel="stylesheet" href="/static/css/form.css">{% endblock %}
+{% block main %}
+
+    <header class="header-form">
+        <h2 class="title-form">Change the data of {{course.name}}</h2>
+        <h4 class="sub-form">This way you won't lose anything, and you can only benefit from it.</h4>
+    </header>
+
+    <main class="main">
+        <article class="eventual-error-block">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    <section class="errors">
+                        <ul class="messages">
+                            {% for category, message in messages %}
+                                <li class="item">{{ message }}</li>
+                            {% endfor %}
+                        </ul>
+                    </section>
+                {% endif %}
+            {% endwith %}
+        </article>
+
+        <form method="post" action="/school/{{course.id}}/edit" class="form">
+            <section class="form-group">
+                <label for="name" class="form-label">Name</label>
+                <input required type="text" class="form-control" id="name" name="name" value="{{course.name}}" placeholder="Python for Beginners">
+                <section id="name" class="form-text">What is the name of the course?</section>
+            </section>
+
+            <section class="form-group">
+                <label for="subtitle" class="form-label">Subtitle</label>
+                <input required type="text" class="form-control" id="subtitle" name="subtitle" value="{{course.subtitle}}" placeholder="Learn Python from scratch">
+                <section id="subtitle" class="form-text">What is the subtitle of the course?</section>
+            </section>
+            
+            <section class="form-group">
+                <label for="description" class="form-label">Description</label>
+                <textarea class="form-control" id="description" name="description" rows="4">{{course.description}}</textarea>
+                <section id="description" class="form-text">What is the description of the course?</section>
+            </section>
+
+            <section class="form-group">
+                <label for="teacher" class="form-label">Teacher</label>
+                <input required type="text" class="form-control" id="teacher" name="teacher" value="{{course.teacher}}" placeholder="John Doe">
+                <section id="teacher" class="form-text">Who is the teacher of the course?</section>
+            </section>
+
+            <section class="form-group">
+                <label for="language" class="form-label">Language</label>
+                <select multiple class="form-select" id="language" for="language" name="language" required>
+                    <option value="English">English</option>
+                    <option value="Spanish">Spanish</option>
+                    <option value="French">French</option>
+                    <option value="German">German</option>
+                    <option value="Italian">Italian</option>
+                  </select>
+                <section id="language" class="form-text">What is the language of the course?</section>
+            </section>
+
+            <section class="form-group">
+                <label for="level" class="form-label">Level</label>
+                <select multiple class="form-select" id="level" for="level" name="level" required>
+                    <option value="Beginner">Beginner</option>
+                    <option value="Intermediate">Intermediate</option>
+                    <option value="Advanced">Advanced</option>
+                  </select>
+                <section id="level" class="form-text">What is the level of the course?</section>
+            </section>
+
+            <section class="form-group">
+                <label for="period" class="form-label">Period</label>
+                <input required type="text" class="form-control" id="period" name="period" value="{{course.period}}" placeholder="Two time a week">
+                <section id="period" class="form-text">What is the period of the course?</section>
+            </section>
+
+            <section class="form-group">
+                <label for="place" class="form-label">Place</label>
+                <input required type="text" class="form-control" id="place" name="place" value="{{course.place}}" placeholder="Room 101">
+                <section id="place" class="form-text">Where is the course held?</section>
+            </section>
+
+            <section class="form-group">
+                <label for="price" class="form-label">Price</label>
+                <input required type="number" class="form-control" id="price" name="price" value="{{course.price}}" placeholder="100">
+                <section id="price" class="form-text">What is the price of the course?</section>
+            </section>
+
+            <section class="form-group">
+                <label for="seats" class="form-label">Seats</label>
+                <input required type="number" class="form-control" id="seats" name="seats" value="{{course.seats}}" placeholder="20">
+                <section id="seats" class="form-text">How many seats are available for the course?</section>
+            </section>
+
+            <button type="submit" class="save">Confirm</button>
+        </form>
+    </main>
+
+{% endblock %}
+{% block script %}{% endblock %}

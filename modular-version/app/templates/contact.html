@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+{% block title %}Contact us{% endblock %}
+{% block styles %}<link rel="stylesheet" href="/static/css/contact.css">{% endblock %}
+{% block main %}
+
+    <main class="contact-container">
+        <article class="where-we-are">
+            <h4 class="where-title">Comes to discover our library</h4>
+            <h5 class="where-subtitle">We are located in the heart of the city, easily accessible by public transport. <br>
+                Address: Via Piatesa, 40015 Pieve di Cento BO, Italy <br>
+                Opening hours: Monday to Friday, 9 AM - 6 PM</h5>
+            </h5>            
+        </article>
+
+        <section class="write-message">
+            <h4 class="write-title">Have questions? Our team is here to assist you</h4>
+            <img src="/static/images/contact.jpeg" alt="Write a message" class="contact-image" loading="lazy">
+            <h5 class="write-subtitle">Fill out the form below to send us a message. We will get back to you as soon as possible.</h5>
+            <article class="write-form">
+                <form method="POST" action="/contact" class="contact-form">
+                    <section class="mb-3">
+                        <label for="name" class="form-label">Name and Surname</label>
+                        <input type="text" class="form-control" id="name" for="name" name="name" required>
+                        <section id="name" class="form-text">What's your name?</section>
+                    </section>
+                    <section class="mb-3">
+                        <label for="message" class="form-label">Your message</label>
+                        <textarea id="message" name="message" class="form-control" rows="5"></textarea>
+                        <section id="message" class="form-text">Write here your message to the library.</section>
+                    </section>
+                
+                    <button type="submit" class="button-send">Send</button>
+                </form>
+            </article>
+        </section>
+    </main>
+{% endblock %}
+{% block scripts %}{% endblock %}

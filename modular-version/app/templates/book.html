@@ -1,0 +1,99 @@
+{% extends "layout.html" %}
+{% block title %}Our books{% endblock %}
+{% block styles %}<link rel="stylesheet" href="/static/css/book.css">{% endblock %}
+{% block main %}
+
+    <header class="book-header">
+        <h1 class="book-title">The Lumina Library- Connect with your books anywhere</h1>
+        <h3 class="book-subtitle">Between Life and the Infinite Possibilities</h3>
+        <h5 class="book-motto">sectione into our carefully curated library of literature, knowledge, and imagination. From timeless classics to modern masterpieces, our collection 
+            spans genres, languages, and cultures — a haven for curious minds and passionate readers. <br>
+            Whether you're seeking adventure, research, or quiet reflection, there's a book waiting for you.</h5>       
+        {% if current.role != "Client" %}
+            <a class="manager-area" href="/book/manager"><i class="fa fa-solid fa-bars-progress"></i></a>
+        {% endif %}
+    </header>
+
+    <main class="book-main">
+
+        <button class="button-start" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+            Start the search now!
+        </button>
+
+        <section class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+            <section class="offcanvas-header">
+                <h5 class="offcanvas-title" id="offcanvasExampleLabel">Discover the Story Behind the Pages</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </section>
+            <section class="offcanvas-body">
+                <p class="off-description">Join our research journey into the world of this book - uncover hidden meanings, explore themes, and connect with others who are sectioning deep 
+                    into its mysteries. Your insights could shape the discussion!</p>
+                <section>
+                    
+                    <form action="/book/keyword" method="POST" class="research-form">
+                        <section class="form-group">
+                            <label for="keywords" class="form-label">Keywords</label>
+                            <textarea class="form-control" id="keywords" name="keywords" rows="1"></textarea>
+                            <section id="keywords" class="form-text">Write your favorite keywords here.</section>
+                        </section>
+                        <button type="submit" class="send"><i class="fa fa-solid fa-magnifying-glass"></i> Start searching</button>
+                    </form>
+                </section>
+            </section>
+        </section>
+
+        <section class="three-tier">
+            <article class="realise">
+                <h3 class="realise-title">New Releases - {{realise.title}}</h3>
+                <h4 class="realise-info">{{realise.author}} on {{realise.publication_date.strftime('%B %d, %Y')}}</h4>
+                <h5 class="realise-subtitle">Keywords: {{realise.keywords}}</h5>
+                <p class="realise-text">Stay updated with the newest titles and authors making waves in the literary world. Our new releases section is a treasure trove of fresh stories, 
+                    innovative ideas, and captivating narratives waiting to be explored.</p>
+                <img src="/static/images/realise.jpeg" alt="New Releases" class="realise-img" loading="lazy">
+            </article>
+            <article class="classic">
+                <h3 class="classic-title">Classic Literature - {{classic.title}}</h3>
+                <h4 class="classic-info">{{classic.author}} on {{classic.publication_date.strftime('%B %d, %Y')}}</h4>
+                <h5 class="classic-subtitle">Keywords: {{classic.keywords}}</h5>
+                <p class="classic-text">Explore the timeless works that have shaped literature and culture. Our classic literature section is a celebration of the stories and ideas that have 
+                    stood the test of time, inviting readers to reflect on the human experience through the ages.</p>
+                <img src="/static/images/classic.jpeg" alt="Classic Literature" class="classic-img" loading="lazy">
+            </article>
+            <article class="new">
+                <h3 class="new-title">New Literature - {{new.title}}</h3>
+                <h4 class="new-info">{{new.author}} on {{new.publication_date.strftime('%B %d, %Y')}}</h4>
+                <h5 class="new-subtitle">Keywords: {{new.keywords}}</h5>
+                <p class="new-text"> Discover the latest voices and innovative narratives that are reshaping the literary landscape. Our new literature section is a gateway to fresh perspectives, 
+                    experimental styles, and thought-provoking themes that challenge conventions and inspire dialogue.</p>
+                <img src="/static/images/new.jpeg" alt="New Literature" class="new-img" loading="lazy">
+            </article>
+        </section>
+
+        <section class="genres">
+            <article class="find">
+                <h2 class="find-title">Discover the genres</h2>
+                <p class="finf-text">Use the search bar below to quickly find books by their genre. Simply start typing, and the list will update dynamically.</p>
+                <input type="text" placeholder="Search for the genre of a book..." aria-label="Search books" class="fint-write">
+            </article>
+
+            <article class="find-dynamic">
+                <ul class="find-list">
+                    {% for genre in genres %}
+                        <li class="find-item">
+                            <form method="POST" action="/book/genre" class="find-form">
+                                <input type="hidden" name="genre" value="{{ genre.genre }}">
+                                <button type="submit" class="find-button">
+                                    <section class="details"><h4 class="name">{{ genre.genre }}</h4></section>
+                                </button>
+                            </form>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </article>
+        </section>
+
+        
+    </main>
+
+{% endblock %}
+{% block scripts %}<script src="/static/js/book.js"></script>{% endblock %}

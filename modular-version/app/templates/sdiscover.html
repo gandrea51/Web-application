@@ -1,0 +1,61 @@
+{% extends "layout.html" %}
+{% block title %}Schools{% endblock %}
+{% block styles %}<link rel="stylesheet" href="/static/css/school.css"><link rel="stylesheet" href="/static/css/discover.css">{% endblock %}
+{% block main %}
+
+    <header class="school-header">
+        <h1 class="school-title">The Lumina Library & Learning Hub</h1>
+        <h3 class="school-subtitle">Where Books Inspire Minds and Courses Ignite Futures</h3>
+    </header>
+
+    <main class="discover-main">
+        <article class="discover-details">
+            <p class="discover-description">The Lumina Library & Learning Hub is more than just a place to borrow books—it's a vibrant center for personal growth and lifelong learning. 
+                Alongside a rich and diverse collection of literature, we offer a wide range of expertly curated courses designed to spark curiosity, deepen knowledge, 
+                and empower individuals of all backgrounds. Whether you're diving into a new language, exploring the digital world, or refining your creative skills, 
+                our library connects you with the resources and instructors to guide your journey. Step inside, and discover a space where stories meet studies, 
+                and passion meets progress.</p>
+            
+            <img src="/static/images/course_discover.jpeg" alt="An introduction to the Lumina Library" class="discover-image" loading="lazy">
+        </article>
+
+        <section class="find-your-course">
+            {% for course in courses %}
+                <article class="course-item">
+                    <h3 class="course-title">{{ course.name }} by {{ course.teacher }}</h3>
+                    <h4 class="course-subname">{{course.subtitle}}</h4>
+                    <h4 class="course-info">Language: {{course.language}}</h4>
+                    <p class="course-text">{{ course.description }}</p>
+                    <button class="book-button" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvas-{{ loop.index }}" aria-controls="offcanvas-{{ loop.index }}">More Info</button>
+                </article>
+
+                <section class="offcanvas offcanvas-end" tabindex="-1" id="offcanvas-{{ loop.index }}" aria-labelledby="offcanvasLabel-{{ loop.index }}">
+                    <section class="offcanvas-header">
+                        <h5 class="offcanvas-title" id="offcanvasLabel-{{ loop.index }}">{{ course.name }}</h5>
+                        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    </section>
+                    <section class="offcanvas-body">
+                        <p class="data">
+                            <strong>Subtitle:</strong> {{ course.subtitle }} <br>
+                            <strong>Teacher:</strong> {{ course.teacher }} <br>
+                            <strong>Description:</strong> {{ course.description }} <br>
+                            <strong>Period:</strong> {{ course.period }} <br>
+                            <strong>Place:</strong> {{ course.place }} <br>
+                            <strong>Price:</strong> {{ course.price }}€
+                        </p>
+                        <br><br>
+                        {% if course.seats > 1 %}
+                            <p class="reserve">Don’t miss your chance to join this course! Secure your spot today and take the next step in your personal 
+                                or professional growth. Click below to enroll and begin your journey with us!</p>
+                            <a href="/reserve/{{course.id}}" class="reserve-course">Inscribe today</a>
+                        {% else %}
+                            <p class="no-reserve">We’re sorry, this course has reached full capacity and no more seats are currently available. 
+                                Please check back later or explore our other exciting courses still open for enrollment.</p>
+                        {% endif %}
+                    </section>
+                </section>
+            {% endfor %}
+        </section>
+    </main>
+
+{% endblock %}

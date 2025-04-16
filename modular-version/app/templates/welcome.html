@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>The Lumina Library - Where Every Page Sparks a Journey</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        
+        <meta name="author" content="The Lumina Library Team">
+        <meta name="description" content="The Lumina Library - A Haven of Knowledge and Imagination">
+        <meta name="keywords" content="Where Every Page Sparks a Journey">
+        <meta name="robots" content="index, follow">
+        
+        <meta property="og:title" content="The Lumina Library">
+        <meta property="og:description" content="The Lumina Library - A Haven of Knowledge and Imagination">
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="">
+        <meta property="og:image" content="">
+    
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:title" content="The Lumina Library">
+        <meta name="twitter:description" content="Where Every Page Sparks a Journey">
+        <meta name="twitter:image" content="">
+    
+        <link rel="icon" type="image/jpeg" href="/static/images/library_intro.jpeg">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&family=Roboto:wght@300;500&display=swap">
+        <link rel="stylesheet" href="/static/css/welcome.css">
+    </head>
+    <body class="library-content">
+        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+            <section class="container-fluid">
+                <a class="navbar-brand" href="/">The Lumina Library</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <section class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="/explore"><i class="fa fa-solid fa-house"></i> Explore</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/about"><i class="fa fa-solid fa-address-card"></i> About us</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/contact"><i class="fa fa-solid fa-message"></i> Contact</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/help"><i class="fa fa-solid fa-circle-info"></i> Help for you</a></li>
+                        {% if not current.is_authenticated %}                            
+                            <li class="nav-item"><a class="nav-link" href="/signup"><i class="fa fa-solid fa-user-plus"></i> Sign Up</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/signin"><i class="fa fa-solid fa-right-to-bracket"></i> Sign In</a></li>
+                        {% endif %}
+                        {% if current.is_authenticated %}
+                            {% if current.role != "Client" %}
+                                <li class="nav-item"><a class="nav-link" href="/message"><i class="fa fa-envelope"></i> Messages</a></li>
+                                <li class="nav-item"><a class="nav-link" href="/loan"><i class="fa fa-book"></i> Loans</a></li>  
+                                <li class="nav-item"><a class="nav-link" href="/booking"><i class="fa-solid fa-bookmark"></i> Bookings</a></li>  
+                            {% endif %}
+                            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                                <li class="nav-item"><a class="nav-link" href="/user/{{current.id}}"><i class="fa fa-solid fa-user-secret"></i> Your Profile</a></li>
+                                <li class="nav-item"><a class="nav-link" href="/signout"><i class="fa fa-solid fa-user-minus"></i> Logout</a></li>    
+                            </ul>
+                        {% endif %}
+                    </ul>
+                </section>
+            </section>
+        </nav>
+
+        <header class="header">
+            <section class="library-header">
+                <h1>The Lumina Library- Connect with your books anywhere</h1>
+                <h3 class="sublink">A Haven of Knowledge and Imagination</h3>
+                <h5 class="subtitle">Where Every Page Sparks a Journey</h5>
+                <img src="/static/images/library_front.jpeg" alt="Background Image" class="background-image" loading="lazy">
+            </section>
+        </header>
+
+        <main class="main">
+            <section class="library-main">
+                <article class="introduction">
+                    <h2 class="library-title">Welcome to The Lumina Library <br> A Sanctuary of Knowledge and Imagination</h2>
+                    <h3 class="library-subtitle">Where Every Page Sparks a Journey</h3>
+                    <p class="library-text">Step into The Lumina Library, a place where stories come to life, ideas flourish, and knowledge knows no bounds. Designed as a modern haven 
+                        for book lovers, researchers, and curious minds, our library offers a vast collection of literature, digital resources, 
+                        and interactive spaces to inspire learning and creativity. <br>
+                        Whether you're here to dive into timeless classics, explore the latest bestsellers, or find a quiet corner to study, The Lumina Library 
+                        is your gateway to discovery. With cutting-edge technology, a welcoming atmosphere, and dedicated spaces for both individual and collaborative 
+                        learning, we aim to connect people with books, knowledge, and each other.
+                    </p>
+                </article>
+                <article class="library-image">
+                    <img src="/static/images/library_choose.jpeg" alt="Library Image" class="library-img" loading="lazy">
+                </article>
+            </section>
+
+            <section class="do-list">
+                <article class="library-offer">
+                    <h3 class="what-offer">What We Offer</h3>
+                    <ul class="what-we-offer">
+                        <li class="offer-item">An extensive collection of books, journals, and digital archives</li>
+                        <li class="offer-item">Comfortable reading areas with a serene ambiance</li>
+                        <li class="offer-item">Interactive events, author talks, and book clubs</li>
+                        <li class="offer-item">Study rooms and research assistance</li>
+                        <li class="offer-item">Free Wi-Fi and multimedia resources</li>
+                    </ul>
+                </article>
+            </section>
+            
+            {% if current.is_authenticated %}
+                <article class="hello-register" id="helloBox">
+                    <button class="close-btn" onclick="document.getElementById('helloBox').style.display='none'">&times;</button>
+                    <h3 class="hello-title">Welcome, {{ current.name }}!</h3>
+                    <h5 class="hello-motto">We're thrilled to have you join The Lumina Library family!</h5>
+                </article>
+            {% endif %}
+
+            <button class="back-to-top" onclick="scrollToTop()"><i class="fa fa-solid fa-arrow-up-from-bracket"></i></button>
+        </main>
+
+        <footer class="footer">
+            <section class="first-side">
+                <section class="logo">
+                    <img src="/static/images/library_intro.jpeg" alt="Logo" class="footer-logo" loading="lazy">
+                </section>
+                <section class="text">
+                    <h4 class="footer-title">The Lumina Library</h4>
+                    <p class="footer-text">Your Gateway to Knowledge and Imagination</p>
+                </section>
+            </section>
+            <section class="copyrights">
+                <p class="footer-copyright">© 2025 The Lumina Library. All rights reserved.</p>
+            </section>
+        </footer>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="/static/js/welcome.js"></script>
+    </body>
+</html>

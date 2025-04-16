@@ -1,0 +1,92 @@
+/* MAIN CONTAINER */
+.about-main {
+    padding: 50px 20px;
+    background-color: #f1f6fa;
+}
+
+.roles {
+    display: flex;
+    justify-content: space-between; /* Distribute the sections evenly */
+    gap: 30px; /* Space between each role section */
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+}
+
+/* INDIVIDUAL ROLE STYLE */
+.roles section {
+    background: #ffffff;
+    border-radius: 15px;
+    padding: 20px;
+    width: 22%; /* Each section takes up 22% of the container width */
+    text-align: center;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.roles section:hover {
+    transform: translateY(-5px); /* Slight lift on hover */
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15); /* Enhanced shadow */
+}
+
+/* TITLE STYLE */
+.title {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #5f72bd;
+    margin-bottom: 15px;
+    letter-spacing: 1px;
+}
+
+/* TEXT DESCRIPTION STYLE */
+.whats {
+    font-size: 1rem;
+    color: #444;
+    line-height: 1.6;
+    margin-bottom: 15px;
+    font-weight: 400;
+}
+
+/* IMAGE STYLING */
+.roles img {
+    width: 100%;
+    height: auto;
+    max-height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+/* LINK STYLING */
+.roles a {
+    color: #9b23ea;
+    font-weight: 600;
+    text-decoration: none;
+    font-size: 1.1rem;
+    transition: color 0.3s ease;
+}
+
+.roles a:hover {
+    color: #5f72bd;
+    text-decoration: underline;
+}
+
+/* RESPONSIVE DESIGN */
+@media (max-width: 1024px) {
+    .roles section {
+        width: 48%; /* Two columns on medium screens */
+    }
+}
+
+@media (max-width: 768px) {
+    .roles section {
+        width: 100%; /* Single column on small screens */
+        margin-bottom: 20px;
+    }
+
+    .title {
+        font-size: 1.4rem;
+    }
+
+    .whats {
+        font-size: 0.95rem;
+    }
+}

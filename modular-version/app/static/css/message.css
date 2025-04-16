@@ -1,0 +1,119 @@
+
+/* HEADER STYLING */
+.header {
+    text-align: center;
+    padding: 2rem 1rem;
+    background: linear-gradient(to right, #6a11cb, #2575fc);
+    color: white;
+    border-radius: 0 0 20px 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.title {
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.subtitle {
+    font-size: 1.1rem;
+    font-weight: 300;
+}
+
+/* IMAGE STYLING */
+.image {
+    display: flex;
+    justify-content: center;
+    padding: 2rem 1rem;
+}
+
+.image-message {
+    width: 80%;
+    max-width: 600px;
+    border-radius: 20px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    object-fit: cover;
+}
+
+/* MESSAGES GRID */
+.items {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    padding: 2rem;
+    max-width: 1200px;
+    margin: auto;
+}
+
+/* INDIVIDUAL MESSAGE CARD */
+.item {
+    background: white;
+    border-radius: 16px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.head {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    color: #2575fc;
+}
+
+.body {
+    font-size: 0.95rem;
+    margin-bottom: 1rem;
+    line-height: 1.5;
+    color: #444;
+}
+
+.foot-date {
+    font-size: 0.8rem;
+    color: #999;
+    margin-bottom: 0.8rem;
+}
+
+/* DELETE LINK */
+.delete {
+    display: inline-block;
+    text-decoration: none;
+    background: #ff4d4f;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    transition: background 0.3s ease;
+}
+
+.delete:hover {
+    background: #d9363e;
+}
+
+.answer-form {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease, padding 0.5s ease;
+    padding: 0 0;
+}
+
+.item.open .answer-form {
+    max-height: 500px; /* Enough to show form content */
+    padding: 1rem 0;
+}
+
+.answer-button {
+    display: inline-block;
+    margin-top: 10px;
+    cursor: pointer;
+    color: #007bff;
+}
+
+.answer-button:hover {
+    text-decoration: underline;
+}

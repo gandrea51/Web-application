@@ -1,0 +1,205 @@
+.school-header {
+    text-align: center;
+    padding: 3rem 1rem;
+    background: linear-gradient(to right, #c98cd3, #86b9dd);
+    border-bottom: 2px solid #e0e0e0;
+    border-radius: 20px;
+    margin-bottom: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.school-title {
+    font-size: 2.5rem;
+    color: #2c3e50;
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+
+.school-subtitle {
+    font-size: 1.3rem;
+    color: #555;
+    font-weight: 400;
+}
+
+.school-main {
+    padding: 3rem 2rem;
+    background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.introduction {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 2rem;
+    padding: 3rem 2rem;
+    background: linear-gradient(145deg, #f9f9f9, #e9f2ff);
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+    max-width: 1200px;
+    margin: 0 auto 4rem auto;
+}
+
+.description {
+    flex: 1 1 65%;
+    font-size: 1.1rem;
+    color: #2c3e50;
+    line-height: 1.8;
+    padding: 1rem 1.5rem;
+    background-color: #ffffffce;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+}
+
+.school-intro-img {
+    flex: 1 1 25%;
+    max-width: 180px;
+    height: auto;
+    border-radius: 12px;
+    object-fit: cover;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+.school-intro-img:hover {
+    transform: scale(1.05);
+}
+
+/* === COURSE SECTION === */
+.two-tier {
+    display: flex;
+    justify-content: space-between;
+    gap: 3rem;
+    flex-wrap: wrap;
+}
+
+.advanced, .german {
+    flex: 1 1 45%;
+    background: linear-gradient(145deg, #d3eafd, #f0faff);
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+.advanced:hover,
+.german:hover {
+    transform: translateY(-5px);
+}
+
+.advanced-title,
+.german-title {
+    font-size: 1.8rem;
+    color: #2c3e50;
+    margin-bottom: 0.5rem;
+}
+
+.advanced-info,
+.german-info {
+    font-size: 1rem;
+    color: #2980b9;
+    margin-bottom: 1rem;
+}
+
+.advanced-text,
+.german-text {
+    font-size: 1rem;
+    color: #444;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+.advanced-img,
+.german-img {
+    width: 100%;
+    border-radius: 15px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+}
+
+.discover-invite {
+    background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+    border-radius: 20px;
+    padding: 2.5rem;
+    margin: 2rem auto;
+    max-width: 800px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    animation: fadeIn 1s ease-in-out;
+    color: #3e3e3e;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.invite-title {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    color: #2b2b2b;
+    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.6);
+}
+
+.invite-paragraph {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    color: #4a4a4a;
+}
+
+.invite-link {
+    display: inline-block;
+    background-color: #ff7e5f;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 50px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(255, 126, 95, 0.3);
+}
+
+.invite-link:hover {
+    background-color: #feb47b;
+    transform: scale(1.05);
+    box-shadow: 0 7px 20px rgba(255, 126, 95, 0.4);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Style for the manager-area button */
+.manager-area {
+    position: fixed; /* Keeps the button fixed on the page */
+    bottom: 20px; /* Positions it 20px from the bottom */
+    right: 20px; /* Positions it 20px from the right */
+    width: 60px; /* Set width and height to create a perfect circle */
+    height: 60px;
+    background-color: #4CAF50; /* Green background for the button */
+    border-radius: 50%; /* Makes the button circular */
+    display: flex; /* Uses flexbox to center the icon */
+    justify-content: center; /* Centers the icon horizontally */
+    align-items: center; /* Centers the icon vertically */
+    color: white; /* White icon color */
+    font-size: 24px; /* Icon size */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Light shadow for depth */
+    transition: background-color 0.3s, transform 0.3s; /* Smooth transition effects */
+    text-decoration: none; /* Removes the default underline for links */
+}
+
+/* Hover effect for the button */
+.manager-area:hover {
+    background-color: #45a049; /* Slightly darker green on hover */
+    transform: scale(1.1); /* Slightly enlarges the button on hover */
+}
+
+/* Focus effect for accessibility */
+.manager-area:focus {
+    outline: none; /* Removes the default outline */
+    box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.5); /* Adds a green outline when focused */
+}

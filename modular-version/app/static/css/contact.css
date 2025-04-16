@@ -1,0 +1,142 @@
+/* Main Container */
+.contact-container {
+    padding: 50px 20px;
+    background: linear-gradient(to right, #8db5dd, #c67dc9);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    
+}
+
+/* Section for Location Details */
+.where-we-are {
+    text-align: center;
+    background: linear-gradient(to left, #8db5dd, #c67dc9);
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    margin-bottom: 40px;
+}
+
+.where-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #3f5d94;
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+}
+
+.where-subtitle {
+    font-size: 1.1rem;
+    color: #444;
+    line-height: 1.6;
+    font-weight: 400;
+}
+
+/* Contact Form Section */
+.write-message {
+    text-align: center;
+    background: linear-gradient(to left, #8db5dd, #c67dc9);
+    border-radius: 15px;
+    padding: 40px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.write-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #9b23ea;
+    margin-bottom: 20px;
+}
+
+.write-subtitle {
+    font-size: 1rem;
+    color: #444;
+    margin-bottom: 30px;
+}
+
+/* Contact Form Image */
+.contact-image { 
+    width: 100%;
+    max-width: 600px;
+    height: auto;
+    margin-bottom: 30px;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+/* Form Styling */
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-label {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #333;
+}
+
+.form-control {
+    padding: 15px;
+    font-size: 1rem;
+    background: linear-gradient(to right, #8db5dd, #c67dc9);
+    border: 2px solid #df19c4;
+    border-radius: 8px;
+    outline: none;
+    transition: border 0.3s ease;
+}
+
+.form-control:focus {
+    border-color: #9b23ea; /* Focus color */
+}
+
+.form-text {
+    font-size: 0.9rem;
+    color: #777;
+}
+
+/* Submit Button */
+.button-send {
+    padding: 15px 30px;
+    background-color: #9b23ea;
+    color: white;
+    font-size: 1.1rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.button-send:hover {
+    background-color: #6a1fb3; /* Darker shade on hover */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .contact-container {
+        padding: 20px;
+    }
+
+    .where-we-are {
+        margin-bottom: 20px;
+        padding: 20px;
+    }
+
+    .write-message {
+        padding: 30px;
+    }
+
+    .contact-form {
+        gap: 15px;
+    }
+
+    .button-send {
+        padding: 12px 25px;
+        font-size: 1rem;
+    }
+}

@@ -1,0 +1,79 @@
+{% extends "layout.html" %}
+{% block title %}Your profile{% endblock %}
+{% block styles %}<link rel="stylesheet" href="/static/css/profile.css">{% endblock %}
+{% block main %}
+
+    <header class="profile-header">
+        {% if current.genre == "Man" %}
+            <img src="/static/images/man.jpeg" alt="Profile Image" class="profile-image" loading="lazy">
+        {% elif current.genre == "Woman" %}
+            <img src="/static/images/woman.jpeg" alt="Profile Image" class="profile-image" loading="lazy">
+        {% else %}
+            <img src="/static/images/other.jpeg" alt="Profile Image" class="profile-image" loading="lazy">
+        {% endif %}
+        <span class="profile-name">Welcome, {{current.name}}!</span>
+        <h3 class="profile-subtitle">Explore and manage your profile</h3>
+        <h5 class="profile-motto">
+            <i class="fa fa-solid fa-book"></i> "A book is a dream that you hold in your hand." - Neil Gaiman
+        </h5>
+    </header>
+
+    <main class="profile-main">
+        <section class="containers">
+            {% for booking in bookings %}
+                <article class="container">
+                    <h4 class="loan-title">Course: {{ booking.course.name }}</h4>
+                    <p class="loan-paragraph">Period: {{ booking.course.period }}<br>
+                        <span class="loan-status">Status: {{ booking.status }}</span><br>
+                        Date: {{ booking.created_at.strftime('%B %d, %Y') }} <br>
+                        {% if booking.status == "Reservation pending" %}
+                            <a href="/request/{{booking.id}}" class="request-to-pay">Request your bank details</a>
+                        {% endif %}
+                    </p> 
+                </article>
+            {% endfor %}
+        </section>
+
+        <section class="containers">
+            {% for loan in loans %}
+                <article class="container">
+                    <h4 class="loan-title">Book: {{ loan.book.title }}</h4>
+                    <p class="loan-paragraph">Position: {{ loan.book.position }}<br>
+                        <span class="loan-status">Status: {{ loan.status }}</span><br>
+                        Date: {{ loan.start.strftime('%B %d, %Y') }} <br>
+                        {% if loan.status == "Confirmed" %}
+                            <span class="loan-status">End: {{ loan.end.strftime('%B %d, %Y') }}</span>
+                        {% endif %}
+                    </p> 
+                </article>
+            {% endfor %}
+        </section>
+    </main>
+
+    <footer class="profile-footer">
+        <article class="ask-question">
+            <h3 class="ask-title">Do you have a question about the library or any other service we offer that is bothering you?</h3>
+            <p class="ask-detail">This is the right place and time to write your question. Fill in the form below and in 48 hours you will be contacted by our staff. Be ready!</p>
+            <img src="/static/images/ask.jpeg" alt="Ask image" class="ask-image" loading="lazy">
+        </article>
+
+        <article class="ask-form">
+            <form method="post" action="/ask" class="contact-form">
+                <section class="mb-3">
+                    <label for="data" class="form-label">Object of the message</label>
+                    <textarea id="data" name="data" class="form-control" rows="1"></textarea>
+                    <section id="data" class="form-text">Summarize the problem in one line.</section>
+                </section>
+                <section class="mb-3">
+                    <label for="question" class="form-label">Text of the message</label>
+                    <textarea id="question" name="question" class="form-control" rows="4"></textarea>
+                    <section id="question" class="form-text">Explain your problem here.</section>
+                </section>
+            
+                <button type="submit" class="button-send">Send</button>
+            </form>
+        </article>
+    </footer>
+    
+{% endblock %}
+{% block scripts %}{% endblock %}

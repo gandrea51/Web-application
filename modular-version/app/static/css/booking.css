@@ -1,0 +1,153 @@
+/* General Styling for the Header */
+.header-booking {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.booking-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #2C3E50;
+    margin-bottom: 10px;
+}
+
+.booking-subtitle {
+    font-size: 1.25rem;
+    color: #7F8C8D;
+    line-height: 1.5;
+    margin-bottom: 30px;
+}
+
+/* Styling for Main Content */
+.booking-main {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* Create 4 equal columns */
+    gap: 20px; /* Spacing between columns */
+    padding: 0 20px;
+}
+
+.booking-main section {
+    background-color: #ecf0f1;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.booking-main section h4 {
+    font-size: 1.2rem;
+    color: #2C3E50;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.booking-main section p {
+    color: #7F8C8D;
+    font-size: 1rem;
+    margin-bottom: 15px;
+    line-height: 1.6;
+}
+
+.booking-main section a {
+    display: inline-block;
+    padding: 10px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    text-align: center;
+    margin-top: 10px;
+    font-weight: 600;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+/* Specific Button Styles */
+.cancel-button {
+    background-color: #E74C3C;
+    color: #fff;
+}
+
+.receive-button {
+    background-color: #F39C12;
+    color: #fff;
+}
+
+.confirm-button {
+    background-color: #2ECC71;
+    color: #fff;
+}
+
+.reserve-course {
+    background-color: #3498DB;
+    color: #fff;
+}
+
+/* Hover Effects */
+.booking-main section a:hover {
+    transform: translateY(-5px); /* Slight lift on hover */
+}
+
+.cancel-button:hover {
+    background-color: #C0392B;
+}
+
+.receive-button:hover {
+    background-color: #F1C40F;
+}
+
+.confirm-button:hover {
+    background-color: #27AE60;
+}
+
+.reserve-course:hover {
+    background-color: #2980B9;
+}
+
+/* Empty Section Styling */
+.no-pending, .no-nopays, .no-pays, .no-confirmeds {
+    font-size: 1.2rem;
+    color: #7F8C8D;
+    text-align: center;
+    padding: 20px;
+}
+
+.pendings, .no-pending{
+    background: linear-gradient(to right, #e0b1a6, #e7ca69); /* Gradient background for pending section */
+    color: #fff; /* White text for better contrast */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.nopays, .no-nopays{
+    background: linear-gradient(to right, #9cccd8, #6aa4da); /* Gradient background for pending section */
+    color: #fff; /* White text for better contrast */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.pays, .no-pays{
+    background: linear-gradient(to right, #beec9f, #a5e27c); /* Gradient background for pending section */
+    color: #fff; /* White text for better contrast */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.confirmeds, .no-confirmeds{
+    background: linear-gradient(to right, #d7afe9, #e29bb9); /* Gradient background for pending section */
+    color: #fff; /* White text for better contrast */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+/* Responsive Design for Mobile */
+@media (max-width: 768px) {
+    .booking-main {
+        grid-template-columns: repeat(2, 1fr); /* 2 columns on medium screens */
+    }
+}
+
+@media (max-width: 480px) {
+    .booking-main {
+        grid-template-columns: 1fr; /* 1 column on small screens */
+    }
+}

@@ -1,0 +1,221 @@
+.discover-main {
+    padding: 3rem 2rem;
+    background: linear-gradient(to bottom right, #f5f7fa, #c3cfe2);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Details Section */
+.discover-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+    margin-bottom: 4rem;
+    background-color: #ffffff;
+    padding: 2rem;
+    border-radius: 20px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+.discover-description {
+    flex: 1 1 400px;
+    font-size: 1.1rem;
+    color: #333;
+    line-height: 1.6;
+}
+
+.discover-image {
+    flex: 1 1 300px;
+    max-width: 300px;
+    border-radius: 16px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+    object-fit: cover;
+}
+
+/* Courses Grid */
+.find-your-course {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.course-item {
+    background: linear-gradient(135deg, #e0f7fa, #e1bee7);
+    padding: 1.5rem;
+    border-radius: 18px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    color: #2e2e2e;
+}
+
+.course-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.course-title {
+    font-size: 1.3rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    color: #4a148c;
+}
+
+.course-subname {
+    font-size: 1rem;
+    margin-bottom: 0.25rem;
+    color: #6a1b9a;
+}
+
+.course-info {
+    font-size: 0.95rem;
+    margin-bottom: 0.75rem;
+    color: #00838f;
+}
+
+.course-text {
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+/* Button Styles for the "More Info" Button */
+.book-button {
+    background: linear-gradient(135deg, #df7cdf, #d35ea2); /* Green gradient background */
+    color: white; /* White text for contrast */
+    border: none; /* Remove default border */
+    padding: 12px 24px; /* Spacing inside the button */
+    font-size: 16px; /* Increase font size for readability */
+    font-weight: bold; /* Bold text to make it stand out */
+    border-radius: 8px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s, transform 0.3s; /* Smooth transition for hover effects */
+    display: inline-block;
+}
+
+/* Hover and Focus Styles */
+.book-button:hover, .book-button:focus {
+    background-color: #45a049; /* Darker green when hovered or focused */
+    transform: translateY(-2px); /* Slightly lift the button on hover */
+    outline: none; /* Remove default outline on focus */
+}
+
+/* Active (Click) Styles */
+.book-button:active {
+    background-color: #388e3c; /* Even darker green when clicked */
+    transform: translateY(2px); /* Button appears to press down */
+}
+
+/* Accessibility Style for Focused Elements */
+.book-button:focus-visible {
+    outline: 3px solid #FFD700; /* Gold outline for focus indication */
+}
+
+/* Offcanvas Container Styles */
+.offcanvas {
+    background-color: #f7f7f7; /* Light gray background for a soft, neutral look */
+    color: #333; /* Dark text color for better readability */
+    border-radius: 15px; /* Rounded corners for a smooth, modern feel */
+    max-width: 500px; /* Limit the width for a neat design */
+    margin: 20px; /* Space around the offcanvas */
+    transition: transform 0.3s ease, opacity 0.3s ease; /* Smooth animation on open */
+}
+
+/* Offcanvas Header */
+.offcanvas-header {
+    background-color: #4CAF50; /* Green background for a vibrant header */
+    color: white; /* White text for the header */
+    padding: 15px;
+    border-top-left-radius: 15px; /* Rounded top corners */
+    border-top-right-radius: 15px;
+    display: flex;
+    justify-content: space-between; /* Align header content neatly */
+    align-items: center;
+}
+
+/* Offcanvas Title */
+.offcanvas-title {
+    font-size: 24px; /* Larger title for better emphasis */
+    font-weight: bold; /* Make the title bold */
+    text-transform: uppercase; /* Uppercase title for a more professional feel */
+}
+
+/* Close Button */
+.btn-close {
+    background-color: transparent; /* Transparent background */
+    border: none; /* Remove default border */
+    color: white; /* White close button */
+    font-size: 20px; /* Large size for the button */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: transform 0.2s ease; /* Smooth transition on hover */
+}
+
+/* Close Button Hover Effects */
+.btn-close:hover {
+    transform: scale(1.1); /* Slightly enlarge the button on hover */
+}
+
+/* Offcanvas Body */
+.offcanvas-body {
+    padding: 20px;
+    background-color: #fff; /* White background for the content area */
+    color: #333;
+    border-radius: 0 0 15px 15px; /* Rounded bottom corners */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
+}
+
+/* Course Information */
+.data {
+    font-size: 16px;
+    line-height: 1.6; /* Line spacing for better readability */
+    color: #444;
+}
+
+/* Strong Text for Labels */
+.data strong {
+    color: #4CAF50; /* Green color for labels */
+    font-weight: bold;
+}
+
+/* Reserve Message */
+.reserve {
+    background-color: #4CAF50; /* Green background for the reserve message */
+    color: white; /* White text for contrast */
+    padding: 15px;
+    border-radius: 8px; /* Rounded corners */
+    margin-top: 20px;
+    font-size: 16px;
+    text-align: center;
+}
+
+/* Reserve Course Button */
+.reserve-course {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 12px 24px;
+    background-color: #f39c12; /* Warm yellow color for the button */
+    color: white;
+    font-weight: bold;
+    border-radius: 8px;
+    text-decoration: none;
+    text-align: center;
+    transition: background-color 0.3s, transform 0.3s; /* Smooth hover transition */
+}
+
+/* Reserve Button Hover Effect */
+.reserve-course:hover {
+    background-color: #e67e22; /* Darker yellow on hover */
+    transform: scale(1.05); /* Slightly enlarge on hover */
+}
+
+/* No Reserve Message */
+.no-reserve {
+    color: #e74c3c; /* Red text to indicate no seats available */
+    font-size: 16px;
+    font-weight: bold;
+    padding: 20px;
+    text-align: center;
+    border: 1px solid #e74c3c; /* Red border to reinforce the message */
+    border-radius: 8px;
+    background-color: #fbecec; /* Light red background for the message */
+    margin-top: 20px;
+}

@@ -1,0 +1,84 @@
+{% extends "layout.html" %}
+{% block title %}Booking{% endblock %}
+{% block styles %}<link rel="stylesheet" href="/static/css/booking.css">{% endblock %}
+{% block main %}
+
+    <header class="header-booking">
+        <h2 class="booking-title">Discover our courses</h2>
+        <h4 class="booking-subtitle">Discover new worlds with the available courses and broaden your horizons. Explore a collection filled with unique stories and timeless classics.</h4>
+    </header>
+
+    <main class="booking-main">
+        <section class="pendings">
+            {% for pending in pendings %}
+                <article class="pending">
+                    <h4 class="pending-title">Course: {{ pending.course.name }}</h4>
+                    <p class="pending-paragraph">Period: {{ pending.course.period }}<br>
+                        User: {{ pending.user.name }}<br>
+                        Status: {{ pending.status }} <br>
+                        Date: {{ pending.created_at.strftime('%B %d, %Y') }}
+                    </p>
+                    <a href="/booking/{{pending.id}}/cancel" class="cancel-button">Drop</a>
+                </article>
+            {% endfor %}
+            {% if not pendings %}
+                <p class="no-pending">No pending bookings</p>
+            {% endif %}
+        </section>
+
+        <section class="nopays">
+            {% for nopay in nopays %}
+                <article class="nopay">
+                    <h4 class="nopay-title">Book: {{ nopay.course.name }}</h4>
+                    <p class="nopay-paragraph">Period: {{ nopay.course.period }}<br>
+                        User: {{ nopay.user.name }}<br>
+                        Status: {{ nopay.status }} <br>
+                        Date: {{ nopay.created_at.strftime('%B %d, %Y') }}
+                    </p>
+                    <a href="/booking/{{nopay.id}}/pay" class="receive-button">Payment receive</a>
+                    <a href="/booking/{{nopay.id}}/cancel" class="cancel-button">Drop</a>
+                </article>
+            {% endfor %}
+            {% if not nopays %}
+                <p class="no-nopays">No bookings "Payment requested"</p>
+            {% endif %}
+        </section>
+
+        <section class="pays">
+            {% for pay in pays %}
+                <article class="pay">
+                    <h4 class="pay-title">Book: {{ pay.course.name }}</h4>
+                    <p class="pay-paragraph">Period: {{ pay.course.period }}<br>
+                        User: {{ pay.user.name }}<br>
+                        Status: {{ pay.status }} <br>
+                        Date: {{ pay.created_at.strftime('%B %d, %Y') }}
+                    </p>                        
+                    <a href="/booking/{{pay.id}}/confirm" class="confirm-button">Confirm</a>
+                    <a href="/booking/{{pay.id}}/cancel" class="cancel-button">Drop</a>
+                </article>
+            {% endfor %}
+            {% if not pays %}
+                <p class="no-pays">No bookings "Payment received"</p>
+            {% endif %}
+        </section>
+
+        <section class="confirmeds">
+            {% for confirmed in confirmeds %}
+                <article class="confirmed">
+                    <h4 class="confirmed-title">Book: {{ confirmed.course.name }}</h4>
+                    <p class="confirmed-paragraph">Period: {{ confirmed.course.period }}<br>
+                        User: {{ confirmed.user.name }}<br>
+                        Status: {{ confirmed.status }} <br>
+                        Date: {{ confirmed.created_at.strftime('%B %d, %Y') }}
+                    </p>
+                    <a href="/booking/{{pay.id}}/cancel" class="cancel-button">Drop</a>
+                </article>
+            {% endfor %}
+            {% if not confirmeds %}
+                <p class="no-confirmeds">No bookings "Reservation confirmed"</p>
+            {% endif %}
+        </section>
+    </main>
+
+{% endblock %}
+{% block script %}{% endblock %}

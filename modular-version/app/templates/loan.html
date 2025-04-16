@@ -1,0 +1,126 @@
+{% extends "layout.html" %}
+{% block title %}Loans{% endblock %}
+{% block styles %}<link rel="stylesheet" href="/static/css/loan.css">{% endblock %}
+{% block main %}
+
+    <header class="header">
+        <h2 class="title">Discover our books</h2>
+        <h4 class="subtitle">Discover new worlds with the available books and broaden your horizons. Explore a collection filled with unique stories and timeless classics.</h4>
+    </header>
+
+    <main class="main">
+        <article class="first-row">
+            <section class="pendings">
+                {% for pending in pendings %}
+                    <article class="pending">
+                        <h4 class="pending-title">Book: {{ pending.book.title }}</h4>
+                        <p class="pending-paragraph">Author: {{ pending.book.author }}<br>
+                            User: {{ pending.user.name }}<br>
+                            Date: {{ pending.start.strftime('%B %d, %Y') }}
+                        </p>
+                        <a href="/loan/{{pending.id}}/confirm" class="confirm-button">Confirm</a>
+                    </article>
+                {% endfor %}
+                {% if not pendings %}
+                    <p class="no-pending">No pending loans</p>
+                {% endif %}
+            </section>
+
+            <section class="confirmeds">
+                {% for confirmed in confirmeds %}
+                    <article class="confirmed">
+                        <h4 class="confirmed-title">Book: {{ confirmed.book.title }}</h4>
+                        <p class="confirmed-paragraph">Author: {{ confirmed.book.title }}<br>
+                            User: {{ confirmed.user.name }}<br>
+                            Date: {{ confirmed.start.strftime('%B %d, %Y') }} <br>
+                            Date: {{ confirmed.end.strftime('%B %d, %Y') }}
+                        </p>
+                        <a href="/loan/{{confirmed.id}}/extend" class="extend-button">Extend</a>
+                        <a href="/loan/{{confirmed.id}}/expire" class="expire-button">Expire</a>
+                        <a href="/loan/{{confirmed.id}}/term" class="term-button">Terminate</a>
+                    </article>
+                {% endfor %}
+                {% if not confirmeds %}
+                    <p class="no-confirmeds">No confirmed loans</p>
+                {% endif %}
+            </section>
+        </article>
+
+        <article class="second-row">
+            <section class="soons">
+                {% for soon in soons %}
+                    <article class="soon">
+                        <h4 class="soon-title">Book: {{ soon.book.title }}</h4>
+                        <p class="soon-paragraph">Author: {{ soon.book.author }}<br>
+                            User: {{ soon.user.name }}<br>
+                            Date: {{ soon.start.strftime('%B %d, %Y') }}<br>
+                            Date: {{ soon.end.strftime('%B %d, %Y') }}
+                        </p>                        
+                        <a href="/loan/{{soon.id}}/extend" class="extend-button">Extend</a>
+                        <a href="/loan/{{soon.id}}/expire" class="expire-button">Expire</a>
+                        <a href="/loan/{{soon.id}}/term" class="term-button">Terminate</a>
+                    </article>
+                {% endfor %}
+                {% if not soons %}
+                    <p class="no-soons">No soons loans</p>
+                {% endif %}
+            </section>
+
+            <section class="expireds">
+                {% for expired in expireds %}
+                    <article class="expired">
+                        <h4 class="expired-title">Book: {{ expired.book.title }}</h4>
+                        <p class="expired-paragraph">Author: {{ expired.book.title }}<br>
+                            User: {{ expired.user.name }}<br>
+                            Date: {{ expired.start.strftime('%B %d, %Y') }}<br>
+                            Date: {{ expired.end.strftime('%B %d, %Y') }}
+                        </p>
+                        <a href="/loan/{{expired.id}}/extend" class="extend-button">Extend</a>
+                        <a href="/loan/{{expired.id}}/term" class="term-button">Terminate</a>
+                    </article>
+                {% endfor %}
+                {% if not expireds %}
+                    <p class="no-expireds">No expired loans</p>
+                {% endif %}
+            </section>
+        </article>
+
+        <article class="three-row">
+            <section class="extendeds">
+                {% for extended in extendeds %}
+                    <article class="extended">
+                        <h4 class="extended-title">Book: {{ extended.book.title }}</h4>
+                        <p class="extended-paragraph">Author: {{ extended.book.author }}<br>
+                            User: {{ extended.user.name }}<br>
+                            Date: {{ extended.start.strftime('%B %d, %Y') }}<br>
+                            Date: {{ extended.end.strftime('%B %d, %Y') }}
+                        </p>
+                        <a href="/loan/{{extended.id}}/expire" class="expire-button">Expire</a>
+                        <a href="/loan/{{extended.id}}/term" class="term-button">Terminate</a>
+                    </article>
+                {% endfor %}
+                {% if not extendeds %}
+                    <p class="no-extendeds">No extended loans</p>
+                {% endif %}
+            </section>
+
+            <section class="terminateds">
+                {% for terminated in terminateds %}
+                    <article class="terminated">
+                        <h4 class="terminated-title">Book: {{ terminated.book.title }}</h4>
+                        <p class="terminated-paragraph">Author: {{ terminated.book.author }}<br>
+                            User: {{ terminated.user.name }}<br>
+                            Date: {{ terminated.start.strftime('%B %d, %Y') }}<br>
+                            Date: {{ terminated.end.strftime('%B %d, %Y') }}
+                        </p>
+                    </article>
+                {% endfor %}
+                {% if not terminateds %}
+                    <p class="no-terminateds">No terminated loans</p>
+                {% endif %}
+            </section> 
+        </article>
+    </main>
+
+{% endblock %}
+{% block script %}{% endblock %}

@@ -1,0 +1,129 @@
+/* Global Styles */
+
+  
+  /* Header */
+  .sign-header {
+    text-align: center;
+    color: #fff;
+    margin-bottom: 2rem;
+    animation: fadeIn 1.5s ease;
+  }
+  
+  .sign-title {
+    font-size: 3rem;
+    font-weight: 700;
+    text-shadow: 1px 1px 4px rgba(0,0,0,0.2);
+  }
+  
+  .sign-subtitle {
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin-top: 0.5rem;
+  }
+  
+  .sign-motto {
+    font-size: 1rem;
+    margin-top: 0.5rem;
+    font-style: italic;
+  }
+  
+  /* Form Container */
+  .sign-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+  
+  .sign-main {
+    background: #ffffffee;
+    padding: 2rem 3rem;
+    border-radius: 1.5rem;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    width: 100%;
+    animation: popIn 1s ease;
+  }
+  
+  /* Form Elements */
+  .sign-form .mb-3 {
+    margin-bottom: 1.5rem;
+  }
+  
+  label.form-label {
+    font-weight: 600;
+    color: #444;
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+  
+  input.form-control,
+  select.form-select {
+    width: 100%;
+    padding: 0.6rem 0.9rem;
+    border: 2px solid #fda085;
+    border-radius: 0.7rem;
+    background-color: #fffdfc;
+    font-size: 1rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  input.form-control:focus,
+  select.form-select:focus {
+    border-color: #f6d365;
+    outline: none;
+    box-shadow: 0 0 0 4px rgba(253, 160, 133, 0.3);
+  }
+  
+  .form-text {
+    font-size: 0.85rem;
+    color: #666;
+    margin-top: 0.3rem;
+    font-style: italic;
+  }
+  
+  /* Button */
+  .button-send {
+    background: linear-gradient(to right, #36d1dc, #5b86e5);
+    color: white;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 2rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: block;
+    width: 100%;
+    margin-top: 1.5rem;
+  }
+  
+  .button-send:hover {
+    background: linear-gradient(to right, #5b86e5, #36d1dc);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+  }
+  
+  /* Animations */
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  @keyframes popIn {
+    0% { opacity: 0; transform: scale(0.9); }
+    100% { opacity: 1; transform: scale(1); }
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 600px) {
+    .sign-main {
+      padding: 2rem;
+      border-radius: 1rem;
+    }
+  
+    .sign-title {
+      font-size: 2rem;
+    }
+  }
+  

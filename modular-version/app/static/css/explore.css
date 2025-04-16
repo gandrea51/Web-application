@@ -1,0 +1,310 @@
+/* EXPLORE HEADER */
+.explore-header {
+    background: linear-gradient(135deg, #9b23ea, #5f72bd);
+    color: white;
+    padding: 100px 20px;
+    text-align: center;
+    border-bottom-left-radius: 40px;
+    border-bottom-right-radius: 40px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    position: relative;
+    overflow: hidden;
+}
+
+/* HEADER TITLE */
+.explore-title {
+    font-size: 3rem;
+    font-weight: 700;
+    color: #fff;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    margin-bottom: 15px;
+    letter-spacing: 1px;
+}
+
+/* HEADER SUBTITLE */
+.explore-subtitle {
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 15px;
+    font-style: italic;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+/* HEADER MOTTO */
+.explore-motto {
+    font-size: 1.2rem;
+    color: #f2e7ff;
+    margin-bottom: 10px;
+}
+
+/* EXPLORE MAIN CONTENT */
+.explore-main {
+    background: linear-gradient(135deg, #8ba0db, #cf77aa);
+    padding: 40px 20px;
+    color: #333;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: block;
+    min-height: 100vh;
+}
+
+/* INTRODUCTION SECTION */
+.explore-introduction {
+    background: linear-gradient(-135deg, #8ba0db, #cf77aa);
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    margin-bottom: 40px;
+    transition: all 0.3s ease;
+}
+
+.explore-introduction:hover {
+    transform: scale(1.02);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* INTRO TITLE */
+.explore-intro-title {
+    font-size: 2rem;
+    color: #5f72bd;
+    font-weight: 700;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+}
+
+/* INTRO TEXT */
+.explore-intro-text {
+    font-size: 1.1rem;
+    color: #555;
+    line-height: 1.8;
+    font-style: italic;
+    text-align: justify;
+}
+
+/* RESPONSIVE DESIGN */
+@media (max-width: 768px) {
+    .explore-header {
+        padding: 80px 20px;
+    }
+
+    .explore-title {
+        font-size: 2.5rem;
+    }
+
+    .explore-subtitle {
+        font-size: 1.4rem;
+    }
+
+    .explore-motto {
+        font-size: 1rem;
+    }
+
+    .explore-main {
+        padding: 30px 15px;
+    }
+
+    .explore-introduction {
+        padding: 25px;
+    }
+}
+
+
+/* GUIDE ARTICLE CONTAINER */
+.explore-guide {
+    display: flex;
+    margin-top: 30px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #e6abd8, #9aa3d8);
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+    margin-bottom: 50px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.explore-guide:hover {
+    transform: scale(1.015);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* TITLE STYLING */
+.guide-title {
+    font-size: 1.8rem;
+    color: #5f72bd;
+    margin-bottom: 20px;
+    font-weight: 700;
+    text-align: center;
+    letter-spacing: 1px;
+    position: relative;
+}
+
+/* Optional underline decoration for guide title */
+.guide-title::after {
+    content: "";
+    display: block;
+    width: 60px;
+    height: 4px;
+    background: #9b23ea;
+    margin: 10px auto 0;
+    border-radius: 4px;
+}
+
+/* GUIDE LIST */
+.guide-list {
+    list-style: none;
+    padding-left: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* EACH ITEM */
+.guide-item {
+    background: linear-gradient(-135deg, #e6abd8, #9aa3d8);
+    border-left: 6px solid #9b23ea;
+    padding: 15px 20px;
+    font-size: 1.1rem;
+    color: #444;
+    border-radius: 8px;
+    transition: background 0.3s ease, border-color 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.guide-item:hover {
+    background: #957bcf;
+    border-left-color: #5f72bd;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .explore-guide {
+        padding: 25px 20px;
+    }
+
+    .guide-title {
+        font-size: 1.5rem;
+    }
+
+    .guide-item {
+        font-size: 1rem;
+        padding: 12px 16px;
+    }
+}
+
+/* MAIN CONTAINER */
+.three-concept {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Three equal columns */
+    gap: 30px; /* Space between columns */
+    align-items: stretch; /* Ensures sections have equal height */
+    padding: 50px 20px;
+    background-color: #f7f5fc;
+}
+
+/* INDIVIDUAL SECTION STYLE */
+.three-concept section {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: center;
+}
+
+/* Hover effect on the section */
+.three-concept section:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* IMAGE STYLE */
+.three-concept img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+/* TITLES STYLE */
+.library-title,
+.schools-title,
+.spaces-title {
+    color: #5f72bd;
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+/* TEXT STYLING */
+.library-text,
+.schools-text,
+.spaces-text {
+    color: #444;
+    font-size: 1rem;
+    margin-bottom: 20px;
+    line-height: 1.7;
+    letter-spacing: 0.5px;
+}
+
+/* LINKS STYLING */
+.library-link,
+.schools-link,
+.spaces-link {
+    color: #9b23ea;
+    font-weight: 600;
+    text-decoration: none;
+    font-size: 1.1rem;
+    margin-top: 10px;
+    transition: color 0.3s ease;
+}
+
+/* Hover effect for the links */
+.library-link:hover,
+.schools-link:hover,
+.spaces-link:hover {
+    color: #5f72bd;
+    text-decoration: underline;
+}
+
+/* RESPONSIVE DESIGN */
+@media (max-width: 1024px) {
+    .three-concept {
+        grid-template-columns: repeat(2, 1fr); /* Two columns on medium screens */
+    }
+}
+
+@media (max-width: 768px) {
+    .three-concept {
+        grid-template-columns: 1fr; /* Single column on small screens */
+        gap: 20px; /* Smaller gap */
+    }
+
+    .three-concept section {
+        padding: 15px;
+    }
+
+    .library-title,
+    .schools-title,
+    .spaces-title {
+        font-size: 1.6rem;
+    }
+
+    .library-text,
+    .schools-text,
+    .spaces-text {
+        font-size: 0.95rem;
+    }
+
+    .library-link,
+    .schools-link,
+    .spaces-link {
+        font-size: 1rem;
+    }
+}

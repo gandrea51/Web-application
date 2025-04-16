@@ -1,0 +1,46 @@
+{% extends "layout.html" %}
+{% block title %}Explore a new world{% endblock %}
+{% block styles %}<link rel="stylesheet" href="/static/css/explore.css">{% endblock %}
+{% block main %}
+
+    <header class="explore-header">
+        <h1 class="explore-title">Explore a new world of books and knowledge</h1>
+        <h3 class="explore-subtitle">Discover the magic of reading</h3>
+        <h5 class="explore-motto">Where Every Page Sparks a Journey</h5>
+    </header>
+
+    <main class="explore-main">
+        <article class="three-concept">
+            <section class="library">
+                <h3 class="library-title">The Lumina Library</h3>
+                <p class="library-text">A sanctuary of knowledge and imagination, where every page sparks a journey. Explore our vast collection of books, journals, and digital resources.</p>
+                <img src="/static/images/books.jpeg" alt="Library Image" class="library-image" loading="lazy">
+                <a href="/book" class="library-link">Find out more</a>
+            </section>
+            <section class="schools">
+                <h3 class="schools-title">Schools and Universities</h3>
+                <p class="schools-text">We collaborate with educational institutions to provide resources and support for students and faculty. Discover our partnerships and programs.</p>
+                <img src="/static/images/schools.jpeg" alt="Schools Image" class="schools-img" loading="lazy">
+                <a href="/school" class="schools-link">Find out more</a>
+            </section>
+            <section class="spaces">
+                <h3 class="spaces-title">Study Spaces</h3>
+                <p class="spaces-text">Our library offers comfortable and quiet study spaces for individuals and groups. Find your perfect spot to read, research, or collaborate.</p>
+                <img src="/static/images/spaces.jpeg" alt="Spaces Image" class="spaces-img" loading="lazy">
+                <a href="/space" class="spaces-link">Find out more</a>
+            </section>
+        </article>
+        
+        <article class="explore-guide">
+            <h3 class="guide-title">How to Explore</h3>
+            <ul class="guide-list">
+                <li class="guide-item">Browse our extensive collection of books and resources.</li>
+                <li class="guide-item">Join our community events and book clubs.</li>
+                <li class="guide-item">Utilize our study spaces and research assistance.</li>
+                <li class="guide-item">Connect with fellow readers and share your thoughts.</li>
+            </ul>
+        </article>
+    </main>
+    
+{% endblock %}
+{% block scripts %}{% endblock %}

@@ -1,0 +1,55 @@
+{% extends "layout.html" %}
+{% block title %}Sign up{% endblock %}
+{% block styles %}<link rel="stylesheet" href="/static/css/sign.css">{% endblock %}
+{% block main %}
+
+    <header class="sign-header">
+        <h1 class="sign-title">Register</h1>
+        <h3 class="sign-subtitle">Join our community of readers!</h3>
+        <h5 class="sign-motto">Fill out the form below to create a new account.</h5>
+    </header>
+
+    <main class="sign-container">
+        <article class="sign-main">
+            <form method="POST" action="/signup" class="sign-form">
+                <section class="mb-3">
+                    <label for="name" class="form-label">Name and Surname</label>
+                    <input type="text" class="form-control" id="name" for="name" name="name" required>
+                    <section id="name" class="form-text">What's your name?</section>
+                </section>
+                <section class="mb-3">
+                    <label for="email" class="form-label">Email address</label>
+                    <input type="email" class="form-control" id="email" for="email" name="email" required>
+                    <section id="email" class="form-text">What's your email address?</section>
+                </section>
+                <section class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="password" for="password" name="password" required>
+                    <section id="password" class="form-text">Choose a strong password.</section>
+                </section>
+                <section class="mb-3">
+                    <label for="confirm" class="form-label">Repeat your password</label>
+                    <input type="password" class="form-control" id="confirm" for="confirm" name="confirm" required>
+                    <section id="confirm" class="form-text">Repeat your password.</section>
+                </section>
+                <section class="mb-3">
+                    <label for="genre" class="form-label">Genre</label>
+                    <select multiple class="form-select" id="genre" for="genre" name="genre" required>
+                        <option value="Man">Man</option>
+                        <option value="Woman">Woman</option>
+                        <option value="Other">Other</option>
+                      </select>
+                    <section id="genre" class="form-text">Choose your genre.</section>
+                </section>
+                <section class="mb-3">
+                    <label for="answer" class="form-label">{{question}}</label>
+                    <input type="text" class="form-control" id="answer" for="answer" name="answer" required>
+                    <section id="answer" class="form-text">Answer the question correctly</section>
+                </section>
+            
+                <button type="submit" class="button-send">Submit</button>
+            </form>
+        </article>
+    </main>
+{% endblock %}
+{% block scripts %}<script src="/static/js/signup.js"></script>{% endblock %}

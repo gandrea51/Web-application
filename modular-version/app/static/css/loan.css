@@ -1,0 +1,160 @@
+.main {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    padding: 2rem;
+    background: linear-gradient(to bottom, #a5d7e4, #8586db);
+}
+
+/* Common section style (e.g., pendings, confirmeds, etc.) */
+.main section {
+    background: linear-gradient(to top, #a5d7e4, #8586db);
+    border-radius: 16px;
+    padding: 1.5rem;
+    box-shadow: 0 6px 18px rgba(92, 60, 146, 0.15);
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    margin: 20px;
+}
+
+/* Card per item */
+.main article {
+    background: linear-gradient(to bottom, #cee3e9, #c6c6f0);
+    padding: 1rem;
+    border-left: 6px solid #b191f3;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(158, 117, 221, 0.1);
+    transition: transform 0.2s ease-in-out;
+}
+
+.main article:hover {
+    transform: translateY(-4px);
+}
+
+/* Headings */
+.pending-title,
+.confirmed-title,
+.soon-title,
+.expired-title,
+.extended-title,
+.terminated-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #5a3d91;
+    margin-bottom: 0.5rem;
+}
+
+/* Paragraphs */
+.pending-paragraph,
+.confirmed-paragraph,
+.soon-paragraph,
+.expired-paragraph,
+.extended-paragraph,
+.terminated-paragraph {
+    font-size: 0.95rem;
+    color: #4c3a6f;
+    line-height: 1.4;
+}
+
+/* Empty text */
+.no-pending,
+.no-confirmeds,
+.no-soons,
+.no-expireds,
+.no-extendeds,
+.no-terminateds {
+    font-style: italic;
+    color: #888;
+    text-align: center;
+}
+
+/* Buttons - shared base */
+.confirm-button,
+.extend-button,
+.expire-button,
+.term-button {
+    display: inline-block;
+    padding: 0.4rem 1rem;
+    margin-right: 0.4rem;
+    margin-top: 0.5rem;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+/* Button Colors */
+.confirm-button {
+    background: #6fbc67;
+    color: white;
+}
+
+.confirm-button:hover {
+    background: #5da556;
+}
+
+.extend-button {
+    background: #5a97d6;
+    color: white;
+}
+
+.extend-button:hover {
+    background: #487ec3;
+}
+
+.expire-button {
+    background: #f48c06;
+    color: white;
+}
+
+.expire-button:hover {
+    background: #db7c03;
+}
+
+.term-button {
+    background: #e85d75;
+    color: white;
+}
+
+.term-button:hover {
+    background: #d1495b;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+    .main {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .main {
+        grid-template-columns: 1fr;
+    }
+}
+
+.header {
+    text-align: center;
+    padding: 2rem 1rem;
+    background: linear-gradient(to bottom, #a1c2ec, #b493eb);
+    border-radius: 12px;
+    margin-bottom: 2rem;
+}
+
+.header .title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #5a3d91;
+    margin-bottom: 0.5rem;
+}
+
+.header .subtitle {
+    font-size: 1.1rem;
+    font-weight: 400;
+    color: #6c5a91;
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
