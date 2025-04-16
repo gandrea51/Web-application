@@ -1,0 +1,125 @@
+{% extends "base.html" %}
+
+{% block title %}{{ libro.titolo }}{% endblock %}
+
+{% block extra_css %}
+<style>
+    /* Specifica CSS per la pagina del libro */
+    .btn-info {
+        transition: background-color 0.3s ease;
+    }
+
+    .btn-info:hover {
+        background-color: #17a2b8;
+        color: #fff;
+    }
+
+    .card {
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        overflow: hidden;
+        transition: box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+        box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    hr {
+        border-top: 2px solid #ddd;
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <!-- Titolo e autore -->
+    <div class="row mb-4 text-center">
+        <div class="col-md-12">
+            <h1 class="display-4">{{ libro.titolo }}</h1>
+            <h2 class="lead">{{ libro.autore }}</h2>
+        </div>
+    </div>
+
+    <!-- Introduzione -->
+    <div class="row mb-4 text-center">
+        <div class="col-md-12">
+            <p class="lead">{{ testo.testo }}</p>
+        </div>
+    </div>
+
+    <hr>
+
+    <!-- Dati sul Prestito -->
+    <div class="row mb-4 text-center">
+        <div class="col-md-12">
+            <h4 class="display-6">{{ copie }}</h4>
+            {% if libro.copie >= 1 %}
+                <h5 class="display-6">
+                    Prenota il libro
+                    {% if libro.note == "Solo consultazione interna" %}
+                        <a href="https://forms.gle/Asjy3bkmaLfZXz1H6" class="btn btn-info">Richiedi le coordinate bancarie</a>
+                    {% else %}
+                        <a href="/prestito/create" class="btn btn-info">Richiedi il prestito</a>
+                    {% endif %}
+                </h5>
+            {% endif %}
+        </div>
+    </div>
+
+    <hr>
+
+    <!-- Proprietà del Libro -->
+    <div class="row">
+        <!-- Informazioni base -->
+        <div class="{{ 'col-md-4' if current_user.ruolo == 'Amministratore' else 'col-md-6' }}">
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">Pubblicato nel {{ libro.anno }}</li>
+                <li class="list-group-item">Genere: {{ libro.genere }}</li>
+                <li class="list-group-item">Casa editrice: {{ libro.editore }}</li>
+                {% if libro.collana %}
+                    <li class="list-group-item">Collana: {{ libro.collana }}</li>
+                {% endif %}
+                {% if libro.note %}
+                    <li class="list-group-item">Note: {{ libro.note }}</li>
+                {% endif %}
+            </ul>
+        </div>
+
+        <!-- Dettagli aggiuntivi -->
+        <div class="{{ 'col-md-4' if current_user.ruolo == 'Amministratore' else 'col-md-6' }}">
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">Classificazione: {{ libro.classificazione }}</li>
+                <li class="list-group-item">Posizione: {{ libro.posizione }}</li>
+                <li class="list-group-item">{{ 'È una rivista' if libro.rivista == "Si" else 'Non è una rivista' }}</li>
+            </ul>
+        </div>
+
+        <!-- Modifica e Elimina -->
+        {% if current_user.ruolo == 'Amministratore' %}
+            <div class="col-md-4 mt-4">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <a href="{{ url_for('libro_edit', libro_id=libro.id) }}" class="btn btn-warning btn-block">Modifica</a>
+                    </li>
+                    <li class="list-group-item">
+                        <form action="{{ url_for('libro_delete', libro_id=libro.id) }}" method="POST">
+                            <input type="submit" class="btn btn-danger btn-block" value="Elimina">
+                        </form>
+                    </li>
+                </ul>
+            </div>
+        {% endif %}
+    </div>
+    <div class="row d-flex justify-content-end">
+        <!-- Link per scaricare la scheda del libro in PDF -->
+        <div class="col-md-12 text-center mt-4">
+            <a href="{{ url_for('scheda_libro', libro_id=libro.id) }}" class="btn btn-dark">
+                Scarica scheda libro in PDF
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

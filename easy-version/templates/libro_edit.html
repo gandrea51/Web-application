@@ -1,0 +1,159 @@
+{% extends "base.html" %}
+
+{% block title %}Modifica {{ libro.titolo }}{% endblock %}
+
+{% block extra_css %}
+<style>
+    .form-group label {
+        font-weight: bold;
+    }
+
+    .form-text {
+        font-size: 0.875rem;
+        color: #6c757d;
+    }
+
+    .btn-warning {
+        background-color: #ffc107;
+        border-color: #ffc107;
+    }
+
+    .btn-warning:hover {
+        background-color: #e0a800;
+        border-color: #d39e00;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <!-- Titolo della pagina -->
+    <div class="row mb-4 text-center">
+        <div class="col-md-12">
+            <h1 class="display-4">Modifica Libro: {{ libro.titolo }}</h1>
+        </div>
+    </div>
+
+    <hr>
+
+    <!-- Modulo di Modifica -->
+    <form action="{{ url_for('libro_edit', libro_id=libro.id) }}" method="POST">
+        <!-- Titolo -->
+        <div class="form-group mb-4">
+            <label for="titolo">Titolo</label>
+            <input id="titolo" class="form-control" name="titolo" type="text" value="{{ libro.titolo }}" placeholder="Inserisci il titolo del libro">
+            <small class="form-text">Titolo del libro</small>
+        </div>
+
+        <!-- Dettagli libro -->
+        <div class="row mb-4">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="anno">Anno</label>
+                    <input id="anno" class="form-control" name="anno" type="text" value="{{ libro.anno }}" placeholder="Anno di pubblicazione">
+                    <small class="form-text">Anno di pubblicazione del libro</small>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="classificazione">Classificazione</label>
+                    <input id="classificazione" class="form-control" name="classificazione" type="text" value="{{ libro.classificazione }}" placeholder="Classificazione del libro">
+                    <small class="form-text">Classificazione del libro</small>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="posizione">Posizione</label>
+                    <input id="posizione" class="form-control" name="posizione" type="text" value="{{ libro.posizione }}" placeholder="Posizione del libro">
+                    <small class="form-text">Posizione del libro</small>
+                </div>
+            </div>
+        </div>
+
+        <!-- Meta dati -->
+        <div class="row mb-4">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="autore">Autore</label>
+                    <input id="autore" class="form-control" name="autore" type="text" value="{{ libro.autore }}" placeholder="Autore del libro">
+                    <small class="form-text">Autore del libro</small>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="genere">Genere</label>
+                    <input id="genere" class="form-control" name="genere" type="text" value="{{ libro.genere }}" placeholder="Genere del libro">
+                    <small class="form-text">Genere del libro</small>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="collana">Collana</label>
+                    <input id="collana" class="form-control" name="collana" type="text" value="{{ libro.collana }}" placeholder="Collana del libro">
+                    <small class="form-text">Collana del libro</small>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="editore">Editore</label>
+                    <input id="editore" class="form-control" name="editore" type="text" value="{{ libro.editore }}" placeholder="Casa editrice del libro">
+                    <small class="form-text">Casa editrice del libro</small>
+                </div>
+            </div>
+        </div>
+
+        <!-- Note -->
+        <div class="form-group mb-4">
+            <label for="note">Note Aggiuntive</label>
+            <textarea id="note" class="form-control" name="note" rows="3" placeholder="Note sul libro">{{ libro.note }}</textarea>
+            <small class="form-text">Eventuali note aggiuntive sul libro</small>
+        </div>
+
+        <!-- Copie, Disponibilità, Libro del mese -->
+        <div class="row mb-4">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="copie">Numero di Copie</label>
+                    <input id="copie" class="form-control" name="copie" type="number" value="{{ libro.copie }}" placeholder="Numero di copie">
+                    <small class="form-text">N. di copie presenti del libro</small>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="disponibile">Disponibilità</label>
+                    <select id="disponibile" class="form-select" name="disponibile">
+                        <option value="Si" {% if libro.disponibile == "Si" %}selected{% endif %}>Disponibile</option>
+                        <option value="No" {% if libro.disponibile == "No" %}selected{% endif %}>Non Disponibile</option>
+                    </select>
+                    <small class="form-text">Disponibilità del libro</small>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="libro_mese">Libro del Mese</label>
+                    <select id="libro_mese" class="form-select" name="libro_mese">
+                        <option value="Si" {% if libro.libro_mese == "Si" %}selected{% endif %}>Sì</option>
+                        <option value="No" {% if libro.libro_mese == "No" %}selected{% endif %}>No</option>
+                    </select>
+                    <small class="form-text">Seleziona se il libro è il libro del mese</small>
+                </div>
+            </div>
+        </div>
+
+        <!-- Rivista -->
+        <div class="form-group mb-4">
+            <label for="rivista">È una Rivista?</label>
+            <select id="rivista" class="form-select" name="rivista">
+                <option value="Si" {% if libro.rivista == "Si" %}selected{% endif %}>Sì</option>
+                <option value="No" {% if libro.rivista == "No" %}selected{% endif %}>No</option>
+            </select>
+            <small class="form-text">Indica se il libro è una rivista</small>
+        </div>
+
+        <!-- Pulsante di Conferma -->
+        <div class="text-center">
+            <button type="submit" class="btn btn-warning">Modifica Libro</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

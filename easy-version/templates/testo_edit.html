@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}Modifica {{ testo.posizione }}{% endblock %}
+
+{% block content %}
+    <br>
+    <div class="row">
+        <div class="row text-center">
+            <div class="col-md-12">
+                <h1 class="display-4">Modifica del testo situato</h1>
+                <h2 class="display-6">{{ testo.posizione }}</h2>
+            </div>
+        </div>
+        <br><hr><br>
+
+        <!-- Modulo -->
+        <form method="POST">
+            <!--Testo-->
+            <div class="row text-center">
+                <div class="col-md-2"></div>
+                <div class="col-md-8">
+                    <div class="form-group">
+                        <textarea class="form-control" name="nuovo" row="5">{{ testo.testo }}</textarea>
+                        <div class="form-text">Scrivi la versione aggiornata del testo</div>
+                    </div>
+                </div>
+                <div class="col-md-2"></div>
+            </div>
+            <br><hr><br>
+            
+            <!--Modifica-->
+            <div class="row text-center">
+                <div class="col-md-3"></div>
+                <div class="col-md-6">
+                    <input class="btn btn-warning" type="submit" value="Modifica">
+                </div>
+                <div class="col-md-3"></div>
+            </div>
+            <br>
+            
+        </form>
+    </div>
+{% endblock %}

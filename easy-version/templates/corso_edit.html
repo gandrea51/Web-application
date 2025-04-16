@@ -1,0 +1,192 @@
+{% extends "base.html" %}
+
+{% block title %}Modifica {{ corso.nome }}{% endblock %}
+
+{% block extra_css %}
+<style>
+    .course-edit-form {
+        max-width: 900px;
+        margin: 0 auto;
+    }
+
+    .course-edit-form .form-group {
+        margin-bottom: 1.5rem;
+    }
+
+    .course-edit-form .form-control {
+        border-radius: 0.25rem;
+        border: 1px solid #ced4da;
+    }
+
+    .course-edit-form .form-text {
+        color: #6c757d;
+    }
+
+    .course-edit-form hr {
+        border: 0;
+        height: 1px;
+        background: #ddd;
+    }
+
+    .course-edit-form .btn-warning {
+        background-color: #ffc107;
+        border: none;
+        border-radius: 0.25rem;
+        padding: 0.75rem 1.5rem;
+        color: #212529;
+    }
+
+    .course-edit-form .btn-warning:hover {
+        background-color: #e0a800;
+        color: #fff;
+    }
+
+    .course-edit-form .col-form-label {
+        font-weight: bold;
+    }
+
+    .course-edit-form .form-control::placeholder {
+        color: #6c757d;
+    }
+
+    .course-edit-form .form-control:focus {
+        border-color: #007bff;
+        box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.25);
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row text-center mb-4">
+            <div class="col-md-12">
+                <h1 class="display-4">{{ corso.nome }}</h1>
+            </div>
+        </div>
+        <hr>
+
+        <!-- Modulo -->
+        <form action="{{ url_for('corso_edit', corso_id=corso.id) }}" method="POST" class="course-edit-form">            
+            <!-- Nome -->
+            <div class="form-group row mb-4">
+                <label for="nome" class="col-md-4 col-form-label text-md-end">Nome</label>
+                <div class="col-md-8">
+                    <input id="nome" name="nome" class="form-control" value="{{ corso.nome }}" type="text" required>
+                    <div class="form-text">Nome del corso</div>
+                </div>
+            </div>
+
+            <!-- Programma -->
+            <div class="form-group row mb-4">
+                <label for="programma" class="col-md-4 col-form-label text-md-end">Programma</label>
+                <div class="col-md-8">
+                    <textarea id="programma" name="programma" class="form-control" rows="4" required>{{ corso.programma }}</textarea>
+                    <div class="form-text">Programma del Corso</div>
+                </div>
+            </div>
+            <hr>
+
+            <!-- Docente, Giorno, Lezioni -->
+            <div class="form-group row mb-4">
+                <label for="docente" class="col-md-4 col-form-label text-md-end">Docente</label>
+                <div class="col-md-4">
+                    <input id="docente" name="docente" class="form-control" value="{{ corso.docente }}" type="text" required>
+                    <div class="form-text">Docente che tiene il corso</div>
+                </div>
+            </div>
+
+            <div class="form-group row mb-4">
+                <label for="giorno" class="col-md-4 col-form-label text-md-end">Giorno</label>
+                <div class="col-md-4">
+                    <input id="giorno" name="giorno" class="form-control" value="{{ corso.giorno }}" type="text" required>
+                    <div class="form-text">Giorni in cui si tiene il corso</div>
+                </div>
+            </div>
+
+            <div class="form-group row mb-4">
+                <label for="lezioni" class="col-md-4 col-form-label text-md-end">Lezioni</label>
+                <div class="col-md-4">
+                    <input id="lezioni" name="lezioni" class="form-control" value="{{ corso.lezioni }}" type="number" min="0" required>
+                    <div class="form-text">N. di lezioni del corso</div>
+                </div>
+            </div>
+            <hr>
+
+            <!-- Note -->
+            <div class="form-group row mb-4">
+                <label for="note" class="col-md-4 col-form-label text-md-end">Note</label>
+                <div class="col-md-8">
+                    <textarea id="note" name="note" class="form-control" rows="2">{{ corso.note }}</textarea>
+                    <div class="form-text">Note sul corso</div>
+                </div>
+            </div>
+            <hr>
+
+            <!-- Inizio, N. minimo, N. massimo -->
+            <div class="form-group row mb-4">
+                <label for="partenza" class="col-md-4 col-form-label text-md-end">Data di Inizio</label>
+                <div class="col-md-8">
+                    <input id="partenza" name="partenza" class="form-control" value="{{ corso.partenza }}" type="date" required>
+                    <div class="form-text">Data di inizio corso</div>
+                </div>
+            </div>
+
+            <div class="form-group row mb-4">
+                <label for="minimo" class="col-md-4 col-form-label text-md-end">Minimo Iscritti</label>
+                <div class="col-md-8">
+                    <input id="minimo" name="minimo" class="form-control" value="{{ corso.minimo }}" type="number" min="0" required>
+                    <div class="form-text">N. minimo di iscritti</div>
+                </div>
+            </div>
+
+            <div class="form-group row mb-4">
+                <label for="massimo" class="col-md-4 col-form-label text-md-end">Massimo Iscritti</label>
+                <div class="col-md-8">
+                    <input id="massimo" name="massimo" class="form-control" value="{{ corso.massimo }}" type="number" min="0" required>
+                    <div class="form-text">N. massimo di iscritti</div>
+                </div>
+            </div>
+            <hr>
+
+            <!-- Contributo, Tessera, Prenotazioni, Iscrizioni -->
+            <div class="form-group row mb-4">
+                <label for="contributo" class="col-md-4 col-form-label text-md-end">Contributo</label>
+                <div class="col-md-3">
+                    <input id="contributo" name="contributo" class="form-control" value="{{ corso.contributo }}" type="number" step="0.01" min="0" max="999.99" required>
+                    <div class="form-text">Contributo per l'iscrizione</div>
+                </div>
+            </div>
+
+            <div class="form-group row mb-4">
+                <label for="tessera" class="col-md-4 col-form-label text-md-end">Tessera</label>
+                <div class="col-md-3">
+                    <input id="tessera" name="tessera" class="form-control" value="{{ corso.tessera }}" type="number" step="0.01" min="0" max="999.99" required>
+                    <div class="form-text">Importo per l'emissione della tessera</div>
+                </div>
+            </div>
+
+            <div class="form-group row mb-4">
+                <label for="prenotazioni" class="col-md-4 col-form-label text-md-end">Prenotazioni</label>
+                <div class="col-md-3">
+                    <input id="prenotazioni" name="prenotazioni" class="form-control" value="{{ corso.prenotazioni }}" type="number" min="0" required>
+                    <div class="form-text">N. di prenotazioni</div>
+                </div>
+            </div>
+
+            <div class="form-group row mb-4">
+                <label for="iscrizioni" class="col-md-4 col-form-label text-md-end">Iscrizioni</label>
+                <div class="col-md-3">
+                    <input id="iscrizioni" name="iscrizioni" class="form-control" value="{{ corso.iscrizioni }}" type="number" min="0" required>
+                    <div class="form-text">N. di iscrizioni</div>
+                </div>
+            </div>
+
+            <!-- Modifica -->
+            <div class="form-group row text-center mb-4">
+                <div class="col-md-12">
+                    <button type="submit" class="btn btn-warning">Modifica</button>
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock %}

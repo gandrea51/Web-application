@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Scheda del Libro: {{ libro.titolo }}</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+        }
+        .content {
+            max-width: 600px;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1, h2 {
+            margin: 0;
+        }
+        h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        h2 {
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        p {
+            margin: 8px 0;
+            font-size: 16px;
+        }
+        .section {
+            margin-bottom: 20px;
+        }
+        .section-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <h1>Scheda del Libro</h1>
+        
+        <h2>{{ libro.titolo }} scritto da {{ libro.autore }} ({{ libro.anno }})</h2>
+
+        <div class="section">
+            <p class="section-title">Dettagli del Libro</p>
+            <p><strong>Genere:</strong> {{ libro.genere }}</p>
+            <p><strong>Casa Editrice:</strong> {{ libro.editore }}</p>
+            {% if libro.collana %}
+                <p><strong>Collana:</strong> {{ libro.collana }}</p>
+            {% endif %}
+        </div>
+
+        <div class="section">
+            <p class="section-title">Classificazione e Posizione</p>
+            <p><strong>Classificazione:</strong> {{ libro.classificazione }}</p>
+            <p><strong>Posizione:</strong> {{ libro.posizione }}</p>
+        </div>
+
+        <div class="section">
+            <p class="section-title">Altre Informazioni</p>
+            <p><strong>È una rivista:</strong> {{ 'Sì' if libro.rivista == 'Si' else 'No' }}</p>
+            {% if libro.note %}
+                <p><strong>Note:</strong> {{ libro.note }}</p>
+            {% endif %}
+            <p><strong>Copie Disponibili:</strong> {{ libro.copie }}</p>
+        </div>
+    </div>
+</body>
+</html>

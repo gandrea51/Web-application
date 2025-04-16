@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title %}Libri{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="row mb-5">
+        <div class="col-md-12 text-center">
+            <h1 class="display-4">Naviga tra i libri</h1>
+        </div>
+    </div>
+
+    <!-- Intro -->
+    <div class="row mb-4 text-center">
+        <div class="col-md-12">
+            <p class="lead">{{ testo.testo }}</p>
+        </div>
+    </div>
+
+    <!-- Risultati -->
+    <div class="row mb-5">
+        <div class="col-md-12 text-center">
+            <p class="lead">Sulla base di quello che hai cercato, ecco i risultati:</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row">
+                {% for libro in libri %}
+                    <div class="col-md-4 mb-4 d-flex align-items-stretch">
+                        <div class="card text-center h-100 risultati">
+                            <div class="card-body">
+                                <h3 class="card-title">{{ libro.titolo }}</h3>
+                                <h5 class="card-subtitle mb-2 text-muted">{{ libro.autore }}</h5>
+                                <p class="card-text">
+                                    Casa editrice: {{ libro.editore }}<br>
+                                    Pubblicato nel: {{ libro.anno }}
+                                </p>
+                                <a href="{{ url_for('libro_show', libro_id = libro.id) }}" class="btn btn-info">Maggiori informazioni</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

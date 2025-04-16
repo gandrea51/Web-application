@@ -1,0 +1,119 @@
+{% extends "base.html" %}
+
+{% block title %}Nuova Prenotazione{% endblock %}
+
+{% block extra_css %}
+<style>
+    .custom-form {
+        background-color: #f9f9f9;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    .form-label {
+        font-weight: bold;
+        color: #333;
+    }
+    .form-text {
+        color: #6c757d;
+    }
+    .custom-button {
+        padding: 10px 20px;
+        font-size: 16px;
+        border-radius: 5px;
+        border: none;
+    }
+    .btn-success {
+        background-color: #28a745;
+        border-color: #28a745;
+    }
+    .btn-success:hover {
+        background-color: #218838;
+        border-color: #1e7e34;
+    }
+    .error-message {
+        color: red;
+        margin-top: 10px;
+    }
+    .suggestions {
+        border: 1px solid #ccc;
+        max-height: 150px;
+        overflow-y: auto;
+    }
+
+    .suggestion {
+        padding: 10px;
+        cursor: pointer;
+    }
+
+    .suggestion:hover {
+        background-color: #f0f0f0;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <!-- Titolo -->
+        <div class="row mb-4 text-center">
+            <div class="col-md-12">
+                <h1 class="display-4">Crea una Nuova Prenotazione</h1>
+                <p class="lead">Per prenotarti, compila il modulo sottostante. Assicurati di scrivere il corso a cui desideri prenotarti.</p>
+            </div>
+        </div>
+        <br><hr><br>
+
+        <!-- Modulo -->
+        <form action="/prenotazione/create" method="post" class="custom-form">
+            <!-- Nome Corso -->
+            <div class="row">
+                <div class="col-md-3"></div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="nome" class="form-label">Nome del Corso</label>
+                        <input type="text" id="nome" name="nome" class="form-control" value="{{ nome }}" required autocomplete="off">
+                        <div class="suggestions" id="suggestions"></div>
+                        <div class="form-text">Nome del corso a cui desideri iscriverti.</div>
+                        {% if error %}
+                            <p class="error-message">{{ error }}</p>
+                        {% endif %}
+                    </div>
+                </div>                
+                <div class="col-md-3"></div>
+            </div>
+            <br>            
+
+            <!-- Conferma -->
+            <div class="row text-center">                
+                <div class="col-md-3"></div>
+                <div class="col-md-6">
+                    <button type="submit" class="btn btn-success custom-button">Conferma</button>
+                </div>
+                <div class="col-md-3"></div>
+            </div>
+            <br>
+        </form>
+    </div>
+    <script>
+        $(document).ready(function() {
+            $('#nome').on('input', function() {
+                let query = $(this).val();
+                if (query.length >= 2) {
+                    $.get('/suggerimento', {query: query}, function(data) {
+                        $('#suggestions').empty();
+                        data.forEach(function(title) {
+                            $('#suggestions').append('<div class="suggestion">' + title + '</div>');
+                        });
+                    });
+                } else {
+                    $('#suggestions').empty();
+                }
+            });
+
+            $(document).on('click', '.suggestion', function() {
+                $('#nome').val($(this).text());
+                $('#suggestions').empty();
+            });
+        });
+    </script>
+{% endblock %}

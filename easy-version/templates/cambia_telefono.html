@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+{% block title %}Reset Telefono{% endblock %}
+
+{% block extra_css %}
+<style>
+    .reset-phone-container {
+        margin-top: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: calc(100vh - 200px);
+    }
+    .reset-phone-card {
+        width: 100%;
+        max-width: 600px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        background-color: #fff;
+        padding: 20px;
+    }
+    .reset-phone-header {
+        font-size: 1.5rem;
+        font-weight: bold;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+    .form-label {
+        font-weight: bold;
+        color: #333;
+    }
+    .form-control {
+        border-radius: 5px;
+        border: 1px solid #ced4da;
+        padding: 10px;
+    }
+    .btn-primary {
+        width: 100%;
+        padding: 10px;
+        font-size: 1rem;
+        border-radius: 5px;
+        border: none;
+        background-color: #007bff;
+        color: #fff;
+    }
+    .btn-primary:hover {
+        background-color: #0056b3;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="reset-phone-container">
+    <div class="reset-phone-card">
+        <div class="reset-phone-header">Ripristina il numero di Telefono</div>
+        <div class="card-body">
+            <form method="post" action="/cambia_telefono">
+                <div class="mb-3">
+                    <label for="nuovo" class="form-label">Numero di Telefono</label>
+                    <input id="nuovo" type="text" class="form-control" name="nuovo" required>
+                </div>
+                <div class="mb-0">
+                    <input type="submit" class="btn btn-primary" value="Cambia">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

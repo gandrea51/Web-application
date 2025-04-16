@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Prestiti</title>
+        <style>
+            @page {
+                size: landscape;
+            }
+            table {
+                width: 90%;
+                border-collapse: collapse;
+            }
+            th, td{ 
+                border: 1px solid black;
+                text-align: center;
+                height: 50px;
+            }
+            h1{
+                padding-top: 20px;
+                text-align: center;
+                font-size: 2.5rem;
+            }  
+        </style>      
+    </head>
+    <body>
+        <h1>Panoramica di tutti i prestiti effettuati</h1>
+        <br><hr><br>
+        <table>
+            <thead>
+                <tr>
+                    <th>Libro</th><th>Effettuato da</th>
+                    <th>Iniziato il</th><th>Scadenza</th><th>Concluso</th><th>Prorogato</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for prestito in prestiti %}
+                    <tr>
+                        <td>{{ prestito.libro.titolo }}</td><td>{{ prestito.utente.nome }}</td>
+                        <td>{{ prestito.uscita.strftime('%d-%m-%Y') }}</td><td>{{ prestito.rientro.strftime('%d-%m-%Y') }}</td>
+                        <td>{{ prestito.terminato }}</td><td>{{ prestito.prorogato }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </body>
+</html>

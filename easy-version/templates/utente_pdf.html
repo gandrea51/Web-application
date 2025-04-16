@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Utenti</title>
+        <style>
+            @page {
+                size: landscape;
+            }
+            table {
+                width: 90%;
+                border-collapse: collapse;
+            }
+            th, td{ 
+                border: 1px solid black;
+                text-align: center;
+                height: 50px;
+            }
+            h1{
+                padding-top: 20px;
+                text-align: center;
+                font-size: 2.5rem;
+            }         
+        </style> 
+    </head>
+    <body>
+        <h1>Tutti gli utenti registrati</h1>
+        <br><hr><br>
+        <table>
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Indirizzo email</th>
+                    <th>N. Telefono</th>
+                    <th>Ruolo</th>
+                    <th>Prestiti</th>
+                    <th>Prenotazioni</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for utente in utenti %}
+                    <tr>
+                        <td>{{ utente.nome }}</td>
+                        <td>{{ utente.email }}</td>
+                        <td>{{ utente.telefono }}</td>
+                        <td>{{ utente.ruolo }}</td>
+                        <td>{{ utente.prestiti_count }}</td>
+                        <td>{{ utente.prenotazioni_count }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </body>
+</html>

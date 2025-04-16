@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Prenotazioni</title>
+        <style>
+            @page {
+                size: landscape;
+            }
+            table {
+                width: 90%;
+                border-collapse: collapse;
+            }
+            th, td{ 
+                border: 1px solid black;
+                text-align: center;
+                height: 50px;
+            }
+            h1{
+                padding-top: 20px;
+                text-align: center;
+                font-size: 2.5rem;
+            }         
+        </style> 
+    </head>
+    <body>
+        <h1>{{ prenotazioni[0].corso.nome }}</h1>
+        <br><hr><br>
+        <table>
+            <thead>
+                <tr>
+                    <th>Stato</th><th>Azioni</th><th>Giorno</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for prenotazione in prenotazioni %}
+                    <tr>
+                        <td>{{ prenotazione.stato }}</td><td>{{ 'Pagamento in attesa' if prenotazione.stato == 'Prenotato' else 'Confermato' }}</td><td>{{ prenotazione.corso.giorno }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </body>
+</html>

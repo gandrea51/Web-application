@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+
+{% block title %}Libri per Genere{% endblock %}
+
+{% block extra_css %}
+<style>
+    .btn-info {
+        transition: background-color 0.3s ease;
+    }
+
+    .btn-info:hover {
+        background-color: #17a2b8;
+        color: #fff;
+    }
+
+    .table thead th {
+        background-color: #f8f9fa;
+        font-weight: bold;
+    }
+
+    .table tbody tr:hover {
+        background-color: #f1f1f1;
+    }
+
+    .table td a {
+        color: #17a2b8;
+        text-decoration: none;
+    }
+
+    .table td a:hover {
+        text-decoration: underline;
+    }
+
+    .d-flex {
+        margin-bottom: 1rem;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <!-- Titolo e introduzione -->
+    <div class="row mb-4 text-center">
+        <div class="col-md-12">
+            <h1 class="display-4">Libri del Genere: {{ libri[0].genere }}</h1>
+        </div>
+    </div>
+
+    <!-- Introduzione -->
+    <div class="row mb-4 text-center">
+        <div class="col-md-12">
+            <p class="lead">{{ testo.testo }}</p>
+        </div>
+    </div>
+
+    <!-- Download PDF e Tabella dei Libri -->
+    <div class="row">
+        <div class="col-md-12">
+            <!-- PDF Download Link -->
+            <div class="d-flex justify-content-end mb-4">
+                <a href="{{ url_for('libro_pdf', genere = libri[0].genere) }}" class="btn btn-light">Scarica PDF</a>
+            </div>
+
+            <!-- Tabella dei Libri -->
+            <table class="table table-striped text-center">
+                <thead>
+                    <tr class="table-info">
+                        <th>Titolo</th>
+                        <th>Autore</th>
+                        <th>Azioni</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for libro in libri %}
+                        <tr>
+                            <td>{{ libro.titolo }}</td>
+                            <td>{{ libro.autore }}</td>
+                            <td>
+                                <a href="{{ url_for('libro_show', libro_id = libro.id) }}" class="btn btn-info">Mostra</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

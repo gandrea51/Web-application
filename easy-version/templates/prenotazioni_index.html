@@ -1,0 +1,204 @@
+{% extends "base.html" %}
+
+{% block title %}Prenotazioni{% endblock %}
+
+{% block extra_css %}
+<style>
+    .container {
+        margin-top: 20px;
+    }
+
+    .title-container {
+        margin-bottom: 20px;
+    }
+
+    .intro-container {
+        margin-bottom: 30px;
+    }
+
+    .btn-custom {
+        margin-top: 20px;
+        margin-bottom: 20px;
+        border-radius: 0.25rem;
+        border: none;
+    }
+
+    .btn-warning-custom {
+        background-color: #ffc107;
+        color: #212529;
+    }
+
+    .btn-warning-custom:hover {
+        background-color: #e0a800;
+        color: #fff;
+    }
+
+    .btn-dark-custom {
+        background-color: #343a40;
+        color: #fff;
+    }
+
+    .btn-dark-custom:hover {
+        background-color: #23272b;
+        color: #fff;
+    }
+
+    .btn-light-custom {
+        background-color: #f8f9fa;
+        color: #212529;
+    }
+
+    .btn-light-custom:hover {
+        background-color: #e2e6ea;
+        color: #212529;
+    }
+
+    .table-container {
+        margin-bottom: 30px;
+    }
+
+    .modal-content {
+        border-radius: 0.25rem;
+    }
+
+    .modal-header {
+        border-bottom: 1px solid #dee2e6;
+    }
+
+    .modal-footer {
+        border-top: 1px solid #dee2e6;
+    }
+
+    .modal-body {
+        padding: 20px;
+    }
+
+    .table-info th {
+        background-color: #d1ecf1;
+        color: #0c5460;
+    }
+
+    .table-container h2 {
+        margin-bottom: 20px;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <!-- Titolo -->
+        <div class="row text-center title-container">
+            <div class="col-md-12">
+                <h1 class="display-4">{{ titolo }}</h1>
+            </div>
+        </div>
+
+        <!-- Intro -->
+        <div class="row intro-container text-center">
+            <div class="col-md-12">
+                <p id="testo{{ testo.id }}">{{ testo.testo }}</p>
+                <form id="form{{ testo.id }}" method="POST" action="{{ url_for('edit_page', testo_id = testo.id) }}" class="edit-form" style="display: none;">
+                    <div class="form-group">
+                        <label for="nuovo" class="form-label">Nuovo Testo:</label>
+                        <textarea class="form-control" id="nuovo" name="nuovo" rows="10">{{ testo.testo }}</textarea>
+                    </div>
+                    <button type="submit" class="btn btn-dark mt-3">Invia</button>
+                </form>
+                {% if current_user.ruolo == "Amministratore" %}
+                    <button type="button" class="btn btn-warning" onclick="toggleForm('testo{{ testo.id }}', 'form{{ testo.id }}')">Modifica</button>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Risultati -->
+        <div class="table-container">
+            {% for corso_id, prenotazioni in prenotazioni_per_corso.items() %}
+                <div class="row">
+                    <div class="col-md-12">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <h2 class="display-6">{{ prenotazioni[0].corso.nome }}</h2>
+                            {% if current_user.ruolo == "Amministratore" %}
+                                <a href="{{ url_for('prenotazione_admin_pdf', corso_id=corso_id) }}" class="btn btn-dark btn-custom">Scarica PDF</a>
+                            {% else %}
+                                <a href="{{ url_for('prenotazione_pdf', corso_id=corso_id) }}" class="btn btn-dark btn-custom">Scarica PDF</a>
+                            {% endif %}
+                        </div>
+                        <table class="table table-striped text-center mt-4">
+                            <thead>
+                                <tr class="table-info">
+                                    {% if current_user.ruolo == "Amministratore" %}<th>Utente</th>{% endif %}
+                                    <th>Corso</th>
+                                    <th>Stato</th>
+                                    {% if current_user.ruolo == "Socio" %}<th>Giorno</th>{% endif %}
+                                    <th>Azioni</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for prenotazione in prenotazioni %}
+                                    <tr>
+                                        {% if current_user.ruolo == "Amministratore" %}<td>{{ prenotazione.utente.nome }}</td>{% endif %}
+                                        <td>{{ prenotazione.corso.nome }}</td>
+                                        <td>{{ prenotazione.stato }}</td>
+                                        {% if current_user.ruolo == "Socio" %}<td>{{ prenotazione.corso.giorno }}</td>{% endif %}
+                                        <td>
+                                            <button type="button" class="btn btn-light btn-custom" data-toggle="modal" data-target="#infoPrenotazione{{prenotazione.id}}">Mostra</button>
+                                            <div class="modal fade" id="infoPrenotazione{{prenotazione.id}}" tabindex="-1" role="dialog" aria-labelledby="infoPrenotazioneLabel{{prenotazione.id}}" aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="infoPrenotazioneLabel{{prenotazione.id}}">Informazioni sulla prenotazione</h5>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            {% if prenotazione.stato == "Prenotato" %}
+                                                                <p><strong>{{ prenotazione.utente.nome }}</strong>, la tua prenotazione è stata registrata con successo e ora è in attesa di pagamento.</p>
+                                                                {% if current_user.nome == prenotazione.utente.nome %}    
+                                                                    <p>Per completare la tua prenotazione e confermare il posto, ti chiediamo di compilare il modulo al link sottostante. Nel modulo, potrai richiedere le coordinate bancarie necessarie per effettuare il pagamento di <strong>{{ prenotazione.corso.contributo }}€</strong>.</p>
+                                                                    <p>Clicca sul pulsante per accedere al modulo e inserire la tua richiesta:</p>
+                                                                    <a href="https://forms.gle/CxCMDByTULSW4Nsn8" class="btn btn-success" target="_blank">Richiedi Coordinate Bancarie</a>
+                                                                {% endif %}
+                                                            {% else %}
+                                                                <p><strong>{{ prenotazione.utente.nome }}</strong>, congratulazioni! Sei stato <strong>ufficialmente iscritto</strong> al corso. Ti aspettiamo per iniziare questa esperienza formativa. Se hai bisogno di ulteriori informazioni, non esitare a contattarci.</p>
+                                                            {% endif %}
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-light btn-custom" data-dismiss="modal">Chiudi</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            {% if current_user.ruolo == "Amministratore" and prenotazione.stato == "Prenotato" %}
+                                                <a href="{{ url_for('conferma_prenotazione', prenotazione_id=prenotazione.id) }}" class="btn btn-dark btn-custom">Completa</a>
+                                            {% endif %}
+                                            {% if current_user.ruolo == "Amministratore" %}
+                                                <form action="{{ url_for('prenotazione_delete', prenotazione_id=prenotazione.id) }}" method="POST" style="display:inline;">
+                                                    <input type="submit" class="btn btn-danger btn-custom" value="Elimina">
+                                                </form>
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        function toggleVisibility(id) {
+            $("#" + id).slideToggle("slow");
+        }
+    
+        function toggleForm(textoId, formId) {
+            $("#" + textoId).slideUp("slow", function() {
+                $("#" + formId).slideDown("slow");
+            });
+        }
+    </script>
+{% endblock %}

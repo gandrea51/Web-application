@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block title %}Modifica {{ utente.nome }}{% endblock %}
+
+{% block content %}
+    <br>
+    <div class="row">
+        <div class="row text-center">
+            <div class="col-md-12">
+                <h1 class="display-4">{{ utente.nome }}</h1>
+            </div>
+        </div>
+        <br><hr><br>
+
+        <!--Modulo-->
+        <form action="{{ url_for('utente_edit', utente_id = utente.id) }}" method="POST">
+            <!--Email-->
+            <div class="row text-center">
+                <p>Indirizzo Email</p>
+                <div class="col-md-3"></div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <input class="form-control" name="email" value="{{ utente.email }}" type="email">
+                        <div class="form-text">Nuovo indirizzo email</div>
+                    </div>
+                </div>
+                <div class="col-md-3"></div>
+            </div>
+            <br><hr><br>
+
+            <!--Telefono-->
+            <div class="row text-center">
+                <p>Numero di Telefono</p>
+                <div class="col-md-3"></div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <input class="form-control" name="telefono" value="{{ utente.telefono }}" type="text">
+                        <div class="form-text">Nuovo numero di Telefono</div>
+                    </div>
+                </div>
+                <div class="col-md-6"></div>
+            </div>
+            <br><hr><br>
+            
+            <!--Modifica-->
+            <div class="row text-center">
+                <div class="col-md-3"></div>
+                <div class="col-md-6">
+                    <input class="btn btn-warning" type="submit" value="Modifica">
+                </div>
+                <div class="col-md-3"></div>
+            </div>
+            <br>            
+        </form>
+    </div>
+{% endblock %}

@@ -1,0 +1,198 @@
+{% extends "base.html" %}
+
+{% block title %}Corsi{% endblock %}
+
+{% block extra_css %}
+<style>
+    .edit-form {
+        border-top: 1px solid #ddd;
+        padding-top: 20px;
+    }
+
+    .custom-btn {
+        background-color: #007bff;
+        color: white;
+        border: none;
+    }
+
+    .custom-btn:hover {
+        background-color: #0056b3;
+        color: white;
+    }
+
+    .corso-card {
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .corso-card:hover {
+        transform: scale(1.05);
+        box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    }
+
+    .corso-card .card-body {
+        padding: 20px;
+    }
+
+    .course-program {
+        text-align: left;
+        color: #333;
+    }
+
+    .corso_desc {
+        font-style: italic;
+    }
+
+    .prenotati {
+        font-weight: bold;
+        color: #d9534f;
+    }
+
+    .card-title {
+        font-size: 1.5rem;
+        color: #007bff;
+    }
+
+    .card-text {
+        color: #6c757d;
+    }
+
+    .card {
+        border-radius: 10px;
+        margin: 15px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .card:hover {
+        transform: scale(1.05);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+    <br>
+    <div class="container">
+
+        <!-- Titolo -->
+        <div class="row text-center mb-4">
+            <div class="col-md-12">
+                <h1 class="display-4">La via per l'apprendimento</h1>
+                <h2 class="lead">Scopri i nostri corsi</h2>
+            </div>
+        </div>
+
+        <!-- Intro e Azioni -->
+        <div class="row mb-4">
+            <div class="{{ 'col-md-10' if current_user.ruolo == 'Amministratore' else 'col-md-12' }}">
+                <p id="testo{{ testo.id }}">{{ testo.testo }}</p>
+                <form id="form{{ testo.id }}" method="POST" action="{{ url_for('edit_page', testo_id = testo.id) }}" class="edit-form" style="display: none;">
+                    <div class="form-group">
+                        <label for="nuovo" class="form-label">Nuovo Testo:</label>
+                        <textarea class="form-control" id="nuovo" name="nuovo" rows="10">{{ testo.testo }}</textarea>
+                    </div>
+                    <button type="submit" class="btn btn-dark mt-3">Invia</button>
+                </form>
+            </div>
+            {% if current_user.ruolo == 'Amministratore' %}
+                <div class="col-md-2 text-end">
+                    <a href="corso/create" class="btn btn-light mb-2">Aggiungi</a>
+                    <button type="button" class="btn btn-warning" onclick="toggleForm('testo{{ testo.id }}', 'form{{ testo.id }}')">Modifica</button>
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="row mb-5 justify-content-center">
+            <div class="col-md-6 animated fadeInUp slower">
+                <div class="card text-center mb-3" style="border-radius: 10%;">
+                    <div class="card-body">
+                        <h5 class="card-title display-6 mb-3">Statistiche</h5>
+                        <p class="card-text">
+                            {% if current_user.ruolo == 'Amministratore' %}
+                                Visualizzazioni totali: {{ stats.total_views }}<br>
+                            {% endif %}
+                            <h6 class="card-title display-6 mb-3">Corsi più Visti</h6>
+                            <div class="list-group mb-3">
+                                {% for corso in stats.top_courses %}
+                                <a class="list-group-item list-group-item-action">
+                                    <strong>{{ corso.nome }}</strong> di {{ corso.docente }} - Views: {{ corso.viste }}
+                                </a>
+                                {% endfor %}
+                            </div>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Risultati -->
+        <div class="row">
+            <!-- PDF -->
+            <div class="d-flex justify-content-end mb-3">
+                <a href="/corsi/pdf" class="btn btn-light custom-btn">Scarica PDF</a>
+            </div>
+            {% for corso in corsi %}
+                <div class="col-md-6 mb-4">
+                    <div class="card text-center corso-card">
+                        <div class="card-body">
+                            <h4 class="card-title display-6">{{ corso.nome }}</h4>
+                            <p class="card-text lead">Docente: {{ corso.docente }}<br>Prenotazioni: {{ corso.prenotazioni }}, Iscrizioni: {{ corso.iscrizioni }}</p>
+                            <p id="programma{{corso.id}}" class="course-program" style="display: none;">
+                                {% if corso.partenza %}Inizio: {{ corso.partenza.strftime('%d/%m/%Y') }}<br>{% endif %}
+                                {{ corso.programma|replace('\n', '<br>')|safe }}<br><br>
+                                <span class="corso_desc">Si tiene {{ corso.giorno }} per {{ corso.lezioni }} lezioni<br>
+                                Contributo per l'iscrizione: {{ corso.contributo }}€ + {{ corso.tessera }}€ per la tessera</span><br><br>
+                                {% if corso.prenotazioni <= corso.massimo or corso.iscrizioni <= corso.massimo %}
+                                    <span class="prenotati">    
+                                        {% if corso.posti_rimasti >= 8 %}
+                                            Ancora molti posti disponibili! Prenota ora!
+                                        {% elif corso.posti_rimasti > 5 %}
+                                            Affrettati, i posti stanno finendo! Solo {{ corso.posti_rimasti }} posti rimasti.
+                                        {% elif corso.posti_rimasti >= 2 %}
+                                            Ultimi posti disponibili! Solo {{ corso.posti_rimasti }} posti rimasti.
+                                        {% else %}
+                                            Ultimo posto disponibile!
+                                        {% endif %} 
+                                        <br>
+                                        <a href="/prenotazione/create" class="btn btn-light">Prenota ora</a></span>
+                                {% endif %}
+                            </p>
+                            <button onclick="toggleVisibilityAndUpdate('{{ corso.id }}')" class="btn btn-dark">Maggiori info</button>
+                            {% if current_user.ruolo == 'Amministratore' %}
+                                <div class="mt-3">
+                                    <a class="btn btn-warning me-2" href="{{ url_for('corso_edit', corso_id = corso.id) }}">Modifica</a>
+                                    <form action="{{ url_for('corso_delete', corso_id = corso.id) }}" method="POST" class="d-inline">
+                                        <input type="submit" class="btn btn-danger" value="Elimina">
+                                    </form>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        function toggleVisibility(id) {
+            $("#" + id).slideToggle("slow");
+        }
+
+        function toggleVisibilityAndUpdate(corsoId) {
+            // Toggle visibility
+            $("#programma" + corsoId).slideToggle("slow");
+
+            // Increment visit count via AJAX
+            $.post('/corso/' + corsoId + '/incrementa_visite');
+        }
+
+        function toggleForm(textoId, formId) {
+            $("#" + textoId).slideUp("slow", function() {
+                $("#" + formId).slideDown("slow");
+            });
+        }
+    </script>
+{% endblock %}

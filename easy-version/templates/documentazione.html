@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+
+{% block title %}Informazioni{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="row text-center mb-5">
+        <div class="col">
+            <h1 class="display-4">Informazioni utili</h1>
+            <p>Qui puoi trovare tutte le informazioni relative al nostro sito e ai servizi che offriamo.</p>
+        </div>
+    </div>
+
+    <div class="row mb-4">
+        <div class="col text-center animated fadeInUp slower">
+            <h4 class="display-6">Come puoi cercare un libro</h4>
+            <p id="searchInfo" class="toggle-info d-none">I libri li puoi cercare in diversi modi:<br>
+                Puoi scorrere i vari generi, sceglierne uno e cercare tra tutti quelli di quel genere.<br>
+                Se hai in mente un autore o un genere, puoi utilizzare l'apposito campo di ricerca per cercare o tutti quelli scritti dal tuo 
+                autore preferito o che appartengono al tuo genere preferito.
+            </p>
+            <button onclick="toggleVisibility('searchInfo')" class="btn btn-outline-primary">Mostra di più</button>
+        </div>
+    </div>
+    <div class="row mb-4">
+        <div class="col text-center animated fadeInUp slower">
+            <h4 class="display-6">Come puoi prendere in prestito un libro</h4>
+            <p id="borrowInfo" class="toggle-info d-none">Per prendere in prestito un libro, segui questi passaggi:<br>
+                Controlla che il libro che hai in mente sia effettivamente disponibile cliccando su "maggiori informazioni" di quel libro.<br>
+                Se è disponibile, troverai il link "prendi in prestito".<br>
+                Ti basterà digitare il titolo dello stesso, scegliere la data in cui lo ritirerai, e confermare.
+            </p>
+            <button onclick="toggleVisibility('borrowInfo')" class="btn btn-outline-primary">Mostra di più</button>
+        </div>
+    </div>
+    <div class="row mb-4">
+        <div class="col text-center animated fadeInUp slower">
+            <h4 class="display-6">Regolamento dei Prestiti</h4>
+            <p id="loanInfo" class="toggle-info d-none">
+                Per effettuare un prestito, ogni utente deve essere registrato come socio ANCeSCAO.<br><br>
+                Il materiale non può essere portato all’esterno del locale senza adeguata segnalazione.<br><br>
+                L’utente dovrà presentare all’operatore il materiale scelto e la tessera per ricevere il tagliando di prestito.<br><br>
+                Il materiale dovrà essere consegnato entro e non oltre 30 giorni, salvo regolare richiesta di proroga di 2 settimane, se non è già stato richiesto da un altro utente. Verrà inviata un’email o un SMS per ricordare la scadenza del prestito.<br><br>
+                Le riviste potranno essere prese in prestito per 15 giorni non prorogabili.<br><br>
+                È vietato portare all’esterno il materiale di sola consultazione.<br><br>
+                In caso di mancata restituzione del prestito, verrà richiesto un risarcimento pari al valore del materiale ed eventuale annullamento della tessera.
+            </p>
+            <button onclick="toggleVisibility('loanInfo')" class="btn btn-outline-primary">Mostra di più</button>
+        </div>
+    </div>
+    <div class="row mb-4">
+        <div class="col text-center animated fadeInUp slower">
+            <h4 class="display-6">Come puoi prenotarti a un corso</h4>
+            <p id="courseInfo" class="toggle-info d-none">Per prenotarti, segui questi passaggi:<br>
+                Accedi alla sezione "corsi" e controlla i posti disponibili per quel corso.<br>
+                Una volta entrato nella pagina di "maggiori informazioni" di quel corso, usa il link "prenotati ora".<br>
+                Digita il nome del corso di tuo interesse e conferma.<br>
+                Ti sei ufficialmente prenotato, non ti resta che pagare la quota di iscrizione per iscriverti definitivamente.
+            </p>
+            <button onclick="toggleVisibility('courseInfo')" class="btn btn-outline-primary">Mostra di più</button>
+        </div>
+    </div>
+
+    <div class="row text-center mb-5">
+        <div class="col animated fadeInUp slower">
+            <h2 class="display-6">Contattaci</h2>
+            <p>Per qualsiasi domanda o feedback, non esitare a <a href="https://forms.gle/CxCMDByTULSW4Nsn8" target="_blank">contattarci</a>.</p>
+        </div>
+    </div>    
+</div>
+
+<script>
+    function toggleVisibility(id) {
+        var element = document.getElementById(id);
+        if (element.classList.contains('d-none')) {
+            element.classList.remove('d-none');
+        } else {
+            element.classList.add('d-none');
+        }
+    }
+
+    $(document).ready(function(){
+        $(".toggle-info").hover(function(){
+            $(this).css("font-size", "20px");
+        }, function(){
+            $(this).css("font-size", "16px");
+        });
+    });
+</script>
+{% endblock %}

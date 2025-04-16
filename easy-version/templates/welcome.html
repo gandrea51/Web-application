@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="utf-8">
+    <title>Ancescao - Biblioteca</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1"> <!-- Aggiunta per migliorare la visualizzazione mobile -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+    <style>
+        body {
+            background-image: url(''); 
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+            font-size: 1.25rem; /* Testo più grande */
+        }
+        .btn-custom {
+            border-radius: 25px;
+            padding: 10px 20px; /* Dimensioni maggiori per i pulsanti */
+        }
+        .animated {
+            animation-duration: 1s;
+            animation-fill-mode: both;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .fadeIn {
+            animation-name: fadeIn;
+        }
+        .info-links a {
+            color: #007bff;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 0 10px;
+            transition: color 0.3s;
+            font-size: 1.25rem; /* Testo più grande */
+        }
+        .info-links a:hover {
+            color: #0056b3;
+        }
+        .info-links i {
+            margin-right: 5px;
+        }
+        .social-media a {
+            color: #333;
+            font-size: 2rem; /* Icone social più grandi */
+            margin: 0 10px;
+            transition: color 0.3s;
+        }
+        .social-media a:hover {
+            color: #007bff;
+        }
+        .social-media i {
+            margin-right: 5px;
+        }
+
+        /* Media Query per dispositivi mobili */
+        @media (max-width: 768px) {
+            header img {
+                width: 100%; /* Immagine intestazione responsive */
+                height: auto;
+            }
+            .btn-custom {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+            .info-links {
+                font-size: 1rem; /* Testo leggermente più piccolo sui dispositivi più piccoli */
+            }
+            .social-media {
+                font-size: 1.5rem; /* Icone social leggermente più piccole sui dispositivi più piccoli */
+            }
+            .container {
+                padding: 0 15px; /* Riduce il padding sui dispositivi mobili */
+            }
+            footer {
+                padding: 0 10px; /* Riduce il padding nel footer sui dispositivi mobili */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Intestazione -->
+        <header class="text-center my-4 animated fadeIn">
+            <img src="{{ url_for('static', filename='images/Striscione.jpg') }}" class="img-fluid" alt="Striscione">
+        </header>
+
+        <!-- Pulsanti di Navigazione -->
+        <div class="row">
+            {% if current_user.is_authenticated %}
+                <div class="col-12 d-flex justify-content-center animated fadeIn">
+                    <a href="/home" class="btn btn-light btn-custom">Home</a>
+                </div>
+            {% else %}
+                <div class="col-12 col-md-6 d-flex justify-content-center animated fadeIn">
+                    <a href="/registrazione" class="btn btn-dark btn-custom">Registrati</a>
+                </div>
+                <div class="col-12 col-md-6 d-flex justify-content-center animated fadeIn">
+                    <a href="/login" class="btn btn-light btn-custom">Accedi</a>
+                </div>
+            {% endif %}
+        </div>
+
+        <!-- Contenuto Principale -->
+        <div class="row text-center mt-4">
+            <div class="col-12 animated fadeIn">
+                <p id="testo{{ testo.id }}">{{ testo.testo }}</p>
+                <form id="form{{ testo.id }}" method="POST" action="{{ url_for('edit_page', testo_id=testo.id) }}" class="d-none mt-3">
+                    <div class="form-group">
+                        <label for="nuovo">Nuovo Testo:</label>
+                        <textarea class="form-control" id="nuovo" name="nuovo" rows="6">{{ testo.testo }}</textarea>
+                    </div>
+                    <button type="submit" class="btn btn-dark mt-3">Invia</button>
+                </form>
+                <div class="info-links lead mt-3">
+                    <p>Per saperne di più, visita i nostri:</p>
+                    <p>
+                        <a href="/libri"><i class="fa fa-book"></i>Libri</a>
+                        <span>|</span>
+                        <a href="/corsi"><i class="fa fa-graduation-cap"></i>Corsi</a>
+                    </p>
+                </div>
+
+                {% if current_user.is_authenticated and current_user.ruolo == 'Amministratore' %}
+                    <div class="d-flex justify-content-end">
+                        <button type="button" class="btn btn-warning" onclick="document.getElementById('testo{{ testo.id }}').style.display = 'none'; document.getElementById('form{{ testo.id }}').style.display = 'block'">Modifica</button>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="text-center mt-5 animated fadeIn">
+            <hr>
+            <p>© 2024 Centro Acquedotto APS ANCeSCAO</p>
+            <div class="social-media">
+                <a href="https://www.facebook.com/centro.acquedotto/?locale=it_IT" target="_blank" class="social-icon"><i class="fa fa-facebook"></i></a>
+                <a href="https://x.com/CAcquedotto" target="_blank" class="social-icon"><i class="fa fa-twitter"></i></a>
+                <a href="https://it.linkedin.com/in/cpsacquedottofe" target="_blank" class="social-icon"><i class="fa fa-linkedin"></i></a>
+                <a href="https://www.instagram.com/cps.acquedotto/" target="_blank" class="social-icon"><i class="fa fa-instagram"></i></a>
+                <a href="https://www.youtube.com/@centroacquedottocorsoisonz1405" target="_blank" class="social-icon"><i class="fa fa-youtube"></i></a>
+            </div>
+        </footer>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"></script>
+</body>
+</html>

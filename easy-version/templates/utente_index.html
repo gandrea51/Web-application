@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard Utenti{% endblock %}
+
+{% block extra_css %}
+<style>
+    .dashboard-intro {
+        text-align: center;
+        color: #333;
+        margin-bottom: 20px;
+    }
+    .dashboard-intro p {
+        font-size: 1.1rem;
+        color: #6c757d;
+    }
+    .custom-table {
+        background-color: #ffffff;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        margin-top: 20px;
+    }
+    .table-info th {
+        background-color: #e9ecef;
+        color: #495057;
+    }
+    .table-striped tbody tr:nth-of-type(odd) {
+        background-color: #f8f9fa;
+    }
+    .btn-warning {
+        background-color: #ffc107;
+        border-color: #ffc107;
+    }
+    .btn-warning:hover {
+        background-color: #e0a800;
+        border-color: #d39e00;
+    }
+    .download-btn {
+        margin-bottom: 15px;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+    <br>
+    <div class="container">
+        <!-- Titolo -->
+        <div class="row text-center">
+            <div class="col-md-12">
+                <h1 class="display-4">Dashboard Utenti</h1>
+            </div>
+        </div>
+        <br>
+
+        <!-- Intro -->
+        <div class="row">
+            <div class="col-md-12 dashboard-intro">
+                <p>Benvenuto nella sezione di gestione degli utenti. Qui puoi visualizzare tutti gli utenti registrati nella nostra applicazione, 
+                indipendentemente dal loro ruolo. Puoi vedere i dati che ogni utente ha inserito e anche modificarli se richiesto.</p>
+            </div> 
+        </div>
+        <br>
+
+        <!-- Risultati -->
+        <div class="row">
+            <div class="col-md-12">
+                <!-- Bottone per scaricare PDF -->
+                <div class="d-flex justify-content-end download-btn">
+                    <a href="/utenti/pdf" class="btn btn-dark">Scarica PDF</a>
+                </div>
+                
+                <!-- Tabella Utenti -->
+                <table class="table table-striped custom-table text-center">
+                    <thead>
+                        <tr class="table-info">
+                            <th>Nome e Cognome</th>
+                            <th>Indirizzo mail</th>
+                            <th>N. di Telefono</th>
+                            <th>Ruolo</th>
+                            <th>Prestiti</th>
+                            <th>Prenotazioni</th>
+                            <th>Azioni</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for utente in utenti %}
+                            <tr>
+                                <td>{{ utente.nome }}</td>
+                                <td>{{ utente.email }}</td>
+                                <td>{{ utente.telefono }}</td>
+                                <td>{{ utente.ruolo }}</td>
+                                <td>{{ utente.prestiti_count }}</td>
+                                <td>{{ utente.prenotazioni_count }}</td>
+                                <td>
+                                    <!-- Commentato il link di modifica -->
+                                    <!-- <a class="btn btn-warning" href="{{ url_for('utente_edit', utente_id = utente.id) }}">Modifica</a> -->
+                                    <span class="btn btn-warning disabled">Modifica</span>
+                                </td>
+                            </tr>
+                       {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

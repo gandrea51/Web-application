@@ -1,0 +1,143 @@
+<!-- templates/utente_profilo.html -->
+{% extends "base.html" %}
+
+{% block title %}Profilo Utente{% endblock %}
+
+{% block extra_css %}
+<style>
+    .alert-custom {
+        border-radius: 0.5rem;
+        margin-bottom: 1rem;
+        padding: 1rem;
+    }
+    .alert-custom.alert-warning {
+        background-color: #fff3cd;
+        color: #856404;
+    }
+    .alert-custom.alert-success {
+        background-color: #d4edda;
+        color: #155724;
+    }
+    .prestito-item, .prenotazione-item {
+        margin-bottom: 1rem;
+        transition: transform 0.3s ease;
+    }
+    .prestito-item:hover, .prenotazione-item:hover {
+        transform: scale(1.03);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+    .btn-outline-dark, .btn-primary {
+        margin-top: 0.5rem;
+    }
+    .card-body ul.list-group {
+        padding: 0;
+    }
+    .card-body ul.list-group .list-group-item {
+        padding: 1rem;
+        border: none;
+    }
+    .card-body h5.card-title {
+        margin-bottom: 1rem;
+    }
+    .btn-info-custom {
+        background-color: #17a2b8;
+        color: white;
+    }
+    .btn-info-custom:hover {
+        background-color: #138496;
+        color: white;
+    }
+    .animated-fade {
+        animation: fadeIn 1s ease-in;
+    }
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+    .alert-info-custom {
+        background-color: rgba(135, 217, 229, 0.3); /* blu chiaro con opacità del 30% */
+        color: #0f5661; /* Colore del testo */
+        border: 1px solid rgba(23, 162, 184, 0.5); /* Colore del bordo con opacità */
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+    <div class="container mt-5">
+
+        <!-- Header Section -->
+        <div class="row text-center mb-4">
+            <div class="col-md-12">
+                <h1 class="display-4">Profilo di {{ utente.nome }}</h1>
+            </div>
+        </div>
+
+        <!-- Profile Card -->
+        <div class="card mb-4 shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title">Dettagli Account</h5>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item"><strong>Nome:</strong> {{ utente.nome }}</li>
+                    <li class="list-group-item"><strong>Email:</strong> {{ utente.email }} 
+                        <a href="/cambia_email" class="btn btn-outline-dark">Cambia email</a>
+                    </li>
+                    <li class="list-group-item"><strong>Telefono:</strong> {{ utente.telefono }} 
+                        <a href="/cambia_telefono" class="btn btn-outline-dark">Cambia telefono</a>
+                    </li>
+                    <li class="list-group-item"><strong>Ruolo:</strong> {{ utente.ruolo }}</li>
+                    <li class="list-group-item"><a href="/cambia_password" class="btn btn-outline-dark">Cambia password</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="row text-center mb-4 animated-fade">
+            <div class="col-md-12">
+                <h5 class="display-6">Prestiti</h5>
+            </div>
+        </div>
+
+        {% if messaggio_prestiti %}
+            <div class="alert alert-info alert-info-custom alert-custom animated-fade" role="alert">
+                <p>{{ messaggio_prestiti|safe }}</p>
+                <a href="/libri" class="btn btn-info-custom">Scopri di più sui prestiti</a>
+            </div>
+        {% endif %}
+        
+        {% if prestiti_attivi %}
+            <div class="list-group">
+                {% for prestito in prestiti_attivi %}
+                    <div class="list-group-item prestito-item animated-fade">
+                        <h5 class="mb-1">Libro: {{ prestito.libro.titolo }}</h5>
+                        <p class="mb-1">Scadenza: {{ prestito.rientro.strftime('%d-%m-%Y') }}<br>
+                            Prorogato: {{ prestito.prorogato }}
+                        </p>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <div class="row text-center mb-4 animated-fade">
+            <div class="col-md-12">
+                <h5 class="display-6">Prenotazioni</h5>
+            </div>
+        </div>
+
+        {% if messaggio_prenotazioni %}
+            <div class="alert alert-info alert-info-custom alert-custom animated-fade" role="alert">
+                <p>{{ messaggio_prenotazioni|safe }}</p>
+                <a  href="/corsi" class="btn btn-info-custom">Prenota ora</a>
+            </div>
+        {% endif %}
+
+        {% if prenotazioni_attive %}
+            <div class="list-group">
+                {% for prenotazione in prenotazioni_attive %}
+                    <div class="list-group-item prenotazione-item animated-fade">
+                        <h5 class="mb-1">{{ prenotazione.corso.nome }}</h5>
+                        <p class="mb-1">Stato: {{ prenotazione.stato }}</p>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

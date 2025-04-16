@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="utf-8">
+    <title>Ancescao</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"></script>
+    
+    <style>
+        body {
+            background-image: url(''); 
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+            padding-top: 50px;
+            font-size: 1.25rem; /* Font size più grande */
+        }
+        .btn {
+            border-radius: 25px;
+            font-size: 1.25rem; /* Font size più grande per i bottoni */
+        }
+        .animated {
+            animation-duration: 1s;
+            animation-fill-mode: both;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .fadeIn {
+            animation-name: fadeIn;
+        }
+        .card-title {
+            font-size: 2rem; /* Font size più grande per i titoli delle card */
+        }
+        .footer {
+            font-size: 1.25rem; /* Font size più grande per il footer */
+        }
+        .social-media a {
+            color: #333;
+            font-size: 1.75rem; /* Font size più grande per le icone social */
+            margin: 0 10px;
+            transition: color 0.3s;
+        }
+        .social-media a:hover {
+            color: #007bff;
+        }
+        .social-media i {
+            margin-right: 5px;
+        }
+
+        @media (max-width: 576px) {
+            /* Adattamenti per schermi piccoli */
+            header img {
+                width: 100%;
+                height: auto;
+            }
+            .btn-group {
+                flex-direction: column;
+                width: 100%;
+            }
+            .btn-group .btn {
+                margin-bottom: 10px;
+            }
+            .card {
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <!-- Header -->
+        <header class="text-center my-4 animated fadeIn slower">
+            <img src="{{ url_for('static', filename='images/Striscione.jpg') }}" class="img-fluid">
+        </header>
+
+        <!-- User Welcome Message -->
+        <section class="text-center animated fadeIn slower">
+            <h2 class="display-6">Benvenuto, {{ utente.nome }}</h2>
+            <p class="lead">
+                Ruolo: {{ utente.ruolo }}<br>
+                Email: {{ utente.email }}<br>
+                <a href="https://forms.gle/CxCMDByTULSW4Nsn8" target="_blank">Richiesta contatto</a>
+            </p>
+        </section>
+
+        <!-- Main Content -->
+        <section class="row justify-content-center text-center my-4">
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body">
+                        <h3 class="card-title">Biblioteca</h3>
+                        <a class="btn btn-light me-2" href="/libri">Visualizza Libri</a>
+                        <a href="/prestiti" class="btn btn-dark">Visualizza Prestiti</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body">
+                        <h3 class="card-title">Corsi</h3>
+                        <a class="btn btn-dark me-2" href="/corsi">Visualizza Corsi</a>
+                        <a class="btn btn-light" href="/prenotazioni">Visualizza Prenotazioni</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <br>
+        <section class="row justify-content-center text-center my-4">
+            {% if current_user.is_authenticated and current_user.ruolo == "Amministratore" %}
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body">
+                            <h3 class="card-title">Utenti</h3>
+                            <p class="card-text">
+                                Soci registrati: {{ user_count }}<br>
+                                Prestiti attivi: {{ prestiti_in_corso }}<br>
+                                Prenotazioni totali: {{ prenotazioni_count }}<br>
+                            </p>
+                            <a class="btn btn-light" href="/utenti">Visualizza Utenti</a>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        </section>         
+        
+        <!-- Logout -->
+        <section class="row">
+            <div class="col-md-12 text-center animated fadeIn slower">
+                <p class="footer">Se hai finito di esplorare per oggi, puoi fare il <a href="/logout">logout</a></p>
+            </div>
+        </section>     
+
+        <!-- Footer -->
+    <footer class="text-center mt-5 animated fadeIn">
+        <hr>
+        <p>© 2024 Centro Acquedotto APS ANCeSCAO</p>
+        <div class="social-media">
+            <a href="https://www.facebook.com/centro.acquedotto/?locale=it_IT" target="_blank" class="social-icon"><i class="fa fa-facebook"></i></a>
+            <a href="https://x.com/CAcquedotto" target="_blank" class="social-icon"><i class="fa fa-twitter"></i></a>
+            <a href="https://it.linkedin.com/in/cpsacquedottofe" target="_blank" class="social-icon"><i class="fa fa-linkedin"></i></a>
+            <a href="https://www.instagram.com/cps.acquedotto/" target="_blank" class="social-icon"><i class="fa fa-instagram"></i></a>
+            <a href="https://www.youtube.com/@centroacquedottocorsoisonz1405" target="_blank" class="social-icon"><i class="fa fa-youtube"></i></a>
+        </div>
+    </footer>
+    </div>
+</body>
+</html>

@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% block title %}Libri{% endblock %}
+
+{% block extra_css %}
+<style>
+    .intro-text {
+        color: #333;
+        font-size: 1.1rem;
+        margin-bottom: 30px;
+    }
+    .card {
+        border-radius: 10px;
+        margin: 15px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .card:hover {
+        transform: scale(1.05);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+    .card-title {
+        font-size: 1.5rem;
+        color: #007bff;
+    }
+    .card-text {
+        color: #6c757d;
+    }
+    .btn-light {
+        background-color: #f8f9fa;
+        border: 1px solid #ddd;
+        color: #495057;
+        font-weight: bold;
+    }
+    .btn-light:hover {
+        background-color: #e2e6ea;
+        color: #212529;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+    <br>
+    <div class="container">
+        <!-- Titolo -->
+        <div class="row text-center">
+            <div class="col-md-12">
+                <h1 class="display-4">Naviga tra i libri</h1>
+            </div>
+        </div>
+        <br>
+
+        <!-- Introduzione -->
+        <div class="row text-center">
+            <div class="col-md-12">
+                <p class="intro-text">{{ testo.testo }}</p>
+            </div>
+        </div>
+        <br>
+
+        <!-- Tutti i Generi distinti -->
+        <div class="row">
+            {% for genere, conteggio in generi %}
+                <div class="col-md-6">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <h4 class="card-title">{{ genere }}</h4>
+                            <p class="card-text">Numero titoli: {{ conteggio }}</p>
+                            <a href="{{ url_for('libro_genere', genere=genere) }}" class="btn btn-light">Visualizza</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

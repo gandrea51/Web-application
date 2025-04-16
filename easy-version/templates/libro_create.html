@@ -1,0 +1,176 @@
+{% extends "base.html" %}
+
+{% block title %}Aggiungi un Libro{% endblock %}
+
+{% block extra_css %}
+<style>
+    .custom-form {
+        background-color: #f9f9f9;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    
+    .form-group label {
+        font-weight: bold;
+    }
+
+    .form-text {
+        font-size: 0.875rem;
+        color: #6c757d;
+    }
+
+    .btn-light {
+        background-color: #f8f9fa;
+        border-color: #ced4da;
+    }
+
+    .btn-light:hover {
+        background-color: #e2e6ea;
+        border-color: #dae0e5;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        border-color: #007bff;
+    }
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+        border-color: #004085;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <!-- Titolo della pagina -->
+    <div class="row mb-4 text-center">
+        <div class="col-md-12">
+            <h1 class="display-4">Aggiungi un Nuovo Libro</h1>
+        </div>
+    </div>
+
+    <hr>
+
+    <!-- Modulo di Inserimento -->
+    <form action="/libro/create" method="POST" class="custom-form">
+        <!-- Titolo -->
+        <div class="form-group mb-4">
+            <label for="titolo">Titolo</label>
+            <input required id="titolo" class="form-control" name="titolo" type="text" placeholder="Inserisci il titolo del libro">
+            <small class="form-text">Titolo del libro</small>
+        </div>
+
+        <!-- Dettagli libro -->
+        <div class="row mb-4">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="anno">Anno</label>
+                    <input required id="anno" class="form-control" name="anno" type="text" placeholder="Anno di pubblicazione">
+                    <small class="form-text">Anno di pubblicazione del libro</small>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="classificazione">Classificazione</label>
+                    <input required id="classificazione" class="form-control" name="classificazione" type="text" placeholder="Classificazione del libro">
+                    <small class="form-text">Classificazione del libro</small>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="posizione">Posizione</label>
+                    <input required id="posizione" class="form-control" name="posizione" type="text" placeholder="Posizione del libro">
+                    <small class="form-text">Posizione del libro</small>
+                </div>
+            </div>
+        </div>
+
+        <!-- Meta dati -->
+        <div class="row mb-4">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="autore">Autore</label>
+                    <input required id="autore" class="form-control" name="autore" type="text" placeholder="Autore del libro">
+                    <small class="form-text">Autore del libro</small>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="genere">Genere</label>
+                    <input required id="genere" class="form-control" name="genere" type="text" placeholder="Genere del libro">
+                    <small class="form-text">Genere del libro</small>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="collana">Collana</label>
+                    <input id="collana" class="form-control" name="collana" type="text" placeholder="Collana del libro">
+                    <small class="form-text">Collana del libro</small>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="editore">Editore</label>
+                    <input required id="editore" class="form-control" name="editore" type="text" placeholder="Casa editrice del libro">
+                    <small class="form-text">Casa editrice del libro</small>
+                </div>
+            </div>
+        </div>
+
+        <!-- Note -->
+        <div class="form-group mb-4">
+            <label for="note">Note Aggiuntive</label>
+            <textarea id="note" class="form-control" name="note" rows="3" placeholder="Note sul libro"></textarea>
+            <small class="form-text">Eventuali note aggiuntive sul libro</small>
+        </div>
+
+        <!-- Copie, Disponibilità, Libro del mese -->
+        <div class="row mb-4">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="copie">Numero di Copie</label>
+                    <input required id="copie" class="form-control" name="copie" type="number" placeholder="Numero di copie">
+                    <small class="form-text">N. di copie presenti del libro</small>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="disponibile">Disponibilità</label>
+                    <select required id="disponibile" class="form-select" name="disponibile">
+                        <option value="Si">Disponibile</option>
+                        <option value="No">Non Disponibile</option>
+                    </select>
+                    <small class="form-text">Disponibilità del libro</small>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="libro_mese">Libro del Mese</label>
+                    <select required id="libro_mese" class="form-select" name="libro_mese">
+                        <option value="Si">Sì</option>
+                        <option value="No" selected>No</option>
+                    </select>
+                    <small class="form-text">Seleziona se il libro è il libro del mese</small>
+                </div>
+            </div>
+        </div>
+
+        <!-- Rivista -->
+        <div class="form-group mb-4">
+            <label for="rivista">È una Rivista?</label>
+            <select required id="rivista" class="form-select" name="rivista">
+                <option value="Si">Sì</option>
+                <option value="No" selected>No</option>
+            </select>
+            <small class="form-text">Indica se il libro è una rivista</small>
+        </div>
+
+        <!-- Pulsante di conferma -->
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary">Aggiungi Libro</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

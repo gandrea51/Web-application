@@ -1,0 +1,71 @@
+<table class="table table-striped text-center">
+    <thead class="table-info">
+        <tr>
+            <th>Libro Prestato</th>
+            {% if current_user.ruolo == "Amministratore" %}<th>Effettuato da</th>{% endif %}
+            <th>Data di Scadenza</th>
+            <th>Concluso</th>
+            <th>Prorogato</th>
+            <th>Azioni</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for prestito in prestiti %}
+            <tr>
+                <td>{{ prestito.libro.titolo }}</td>
+                {% if current_user.ruolo == "Amministratore" %}<td>{{ prestito.utente.nome }}</td>{% endif %}
+                <td>
+                    {% if prestito.terminato == 'No' %}
+                        <span class="{% if days_remaining[prestito.id]|int < 7 %}text-danger{% elif days_remaining[prestito.id]|int <= 15 %}text-warning{% else %}text-success{% endif %}">
+                            {{ days_remaining[prestito.id] }} giorni
+                        </span>
+                    {% else %}
+                        {{ prestito.rientro.strftime('%d-%m-%Y') }}
+                    {% endif %}
+                </td>
+                <td>{{ prestito.terminato }}</td>
+                <td>{{ prestito.prorogato }}</td>
+                <td>
+                    <!-- Mostra Dettagli Prestito -->
+                    <button type="button" class="btn btn-light" data-toggle="modal" data-target="#infoPrestito{{ prestito.id }}">Mostra</button>
+
+                    <!-- Modal con Dettagli Prestito -->
+                    <div class="modal fade" id="infoPrestito{{ prestito.id }}" tabindex="-1" role="dialog" aria-labelledby="infoPrestitoLabel{{ prestito.id }}" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="infoPrestitoLabel{{ prestito.id }}">Informazioni sul prestito</h5>
+                                </div>
+                                <div class="modal-body">
+                                    {% if prestito.terminato == 'Si' %}
+                                        Il prestito è terminato il {{ prestito.rientro.strftime('%d-%m-%Y') }}.
+                                    {% elif prestito.prorogato == 'No' %}
+                                        Dovrai riconsegnare il libro entro il {{ prestito.rientro.strftime('%d-%m-%Y') }}.
+                                        <br>
+                                        Puoi prorogare il prestito per ulteriori 15 giorni una sola volta.
+                                        <br>
+                                        <a href="{{ url_for('extend', prestito_id=prestito.id) }}" class="btn btn-dark">Estendi</a>
+                                    {% else %}
+                                        Il prestito è stato prorogato. Dovrai riconsegnare il libro entro il {{ prestito.rientro.strftime('%d-%m-%Y') }}.
+                                    {% endif %}
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-light" data-dismiss="modal">Chiudi</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Azioni per Amministratore -->
+                    {% if current_user.ruolo == "Amministratore" %}
+                        {% if prestito.terminato == "No" %}
+                            <a href="{{ url_for('termina', prestito_id=prestito.id) }}" class="btn btn-dark">Termina</a>
+                        {% endif %}
+                        <form action="{{ url_for('prestito_delete', prestito_id=prestito.id) }}" method="POST" class="d-inline">
+                            <input type="submit" class="btn btn-danger" value="Elimina">
+                        </form>
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>

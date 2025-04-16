@@ -1,0 +1,127 @@
+{% extends "base.html" %}
+
+{% block title %}Nuovo Prestito{% endblock %}
+
+{% block extra_css %}
+<style>
+    .custom-form {
+        background-color: #f9f9f9;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    .form-label {
+        font-weight: bold;
+        color: #333;
+    }
+    .form-text {
+        color: #6c757d;
+    }
+    .custom-button {
+        padding: 10px 20px;
+        font-size: 16px;
+        border-radius: 5px;
+        border: none;
+    }
+    .btn-success {
+        background-color: #28a745;
+        border-color: #28a745;
+    }
+    .btn-success:hover {
+        background-color: #218838;
+        border-color: #1e7e34;
+    }
+    .suggestions {
+        border: 1px solid #ccc;
+        max-height: 150px;
+        overflow-y: auto;
+    }
+
+    .suggestion {
+        padding: 10px;
+        cursor: pointer;
+    }
+
+    .suggestion:hover {
+        background-color: #f0f0f0;
+    }
+</style>
+{% endblock %}
+{% block content %}
+    <br>
+    <div class="container">
+        <!-- Titolo -->
+        <div class="row mb-4 text-center">
+            <div class="col-md-12">
+                <h1 class="display-4">Crea un Nuovo Prestito</h1>
+                <p class="lead">Completa il modulo sottostante per registrare un nuovo prestito. Assicurati di inserire tutte le informazioni richieste.</p>
+            </div>
+        </div>
+        <br><hr><br>
+
+        <!-- Modulo -->
+        <form action="/prestito/create" method="post" class="custom-form">
+            <!-- Selezione Libro -->
+            <div class="row text-center">
+                <div class="col-md-3"></div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="titolo" class="form-label">Titolo del Libro</label>
+                        <input type="text" id="titolo" name="titolo" class="form-control" required autocomplete="off">
+                        <div class="suggestions" id="suggestions"></div>
+                        <div class="form-text">Inserisci il titolo del libro che desideri prendere in prestito.</div>
+                    </div>
+                </div>
+                <div class="col-md-3"></div>
+            </div>
+            <br>
+
+            <!-- Data di inizio -->
+            <div class="row text-center">
+                <div class="col-md-3"></div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="uscita" class="form-label">Data di Uscita</label>
+                        <input id="uscita" name="uscita" class="form-control" type="date" required>
+                        <div class="form-text">Seleziona la data in cui ritirerai il libro.</div>
+                    </div>
+                </div>
+                <div class="col-md-3"></div>
+            </div>
+            <br>
+
+            <!-- Conferma -->
+            <div class="row text-center">
+                <div class="col-md-3"></div>
+                <div class="col-md-6">
+                    <button type="submit" class="btn btn-success custom-button">Conferma</button>
+                </div>
+                <div class="col-md-3"></div>
+            </div>
+            <br>
+        </form>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            $('#titolo').on('input', function() {
+                let query = $(this).val();
+                if (query.length >= 2) {
+                    $.get('/suggest', {query: query}, function(data) {
+                        $('#suggestions').empty();
+                        data.forEach(function(title) {
+                            $('#suggestions').append('<div class="suggestion">' + title + '</div>');
+                        });
+                    });
+                } else {
+                    $('#suggestions').empty();
+                }
+            });
+
+            $(document).on('click', '.suggestion', function() {
+                $('#titolo').val($(this).text());
+                $('#suggestions').empty();
+            });
+        });
+    </script>
+{% endblock %}

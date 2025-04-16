@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+
+{% block title %}Prestiti{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <!-- Messaggi di Flash -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }} text-center display-6">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <!-- Titolo -->
+    <div class="row text-center mb-4">
+        <div class="col-md-12">
+            {% if current_user.ruolo == "Amministratore" %}
+                <h1 class="display-4">Panoramica dei Prestiti</h1>
+            {% elif current_user.ruolo == "Socio" %}
+                <h1 class="display-4">{{ current_user.nome }} - Le tue prossime letture</h1>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Introduzione e Modifica Testo -->
+    <div class="row text-center mb-4">
+        <div class="col-md-12">
+            <p id="testo{{ testo.id }}">{{ testo.testo }}</p>
+                <form id="form{{ testo.id }}" method="POST" action="{{ url_for('edit_page', testo_id = testo.id) }}" class="edit-form" style="display: none;">
+                    <div class="form-group">
+                        <label for="nuovo" class="form-label">Nuovo Testo:</label>
+                        <textarea class="form-control" id="nuovo" name="nuovo" rows="10">{{ testo.testo }}</textarea>
+                    </div>
+                    <button type="submit" class="btn btn-dark mt-3">Invia</button>
+                </form>
+            {% if current_user.ruolo == "Amministratore" %}
+                <div class="mt-3">
+                    <a href="{{ url_for('create_prestito') }}" class="btn btn-light">Crea Prestito</a>
+                    <button type="button" class="btn btn-warning" onclick="toggleForm('testo{{ testo.id }}', 'form{{ testo.id }}')">Modifica</button>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Risultati Prestiti -->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="d-flex justify-content-end mb-3">
+                {% if current_user.ruolo == "Socio" %}
+                    <a href="{{ url_for('prestiti_pdf') }}" class="btn btn-light">Scarica PDF</a>
+                {% elif current_user.ruolo == "Amministratore" %}
+                    <a href="{{ url_for('prestiti_admin_pdf') }}" class="btn btn-light">Scarica PDF</a>
+                {% endif %}
+            </div>
+            {% if current_user.ruolo == "Socio" and not prestiti %}
+                <div class="alert alert-info text-center">
+                    <p><strong>Hai ancora la possibilità di scoprire nuovi libri!</strong></p>
+                    <p>Non hai effettuato prestiti finora. Approfitta delle nostre risorse e prenota il tuo prossimo libro.</p>
+                    <a href="/prestito/create" class="btn btn-primary">Prenota ora</a>
+                </div>
+            {% else %}
+                {% include 'prestito_table.html' %}
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        function toggleVisibility(id) {
+            $("#" + id).slideToggle("slow");
+        }
+    
+        function toggleForm(textoId, formId) {
+            $("#" + textoId).slideUp("slow", function() {
+                $("#" + formId).slideDown("slow");
+            });
+        }
+    </script>
+{% endblock %}

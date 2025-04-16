@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %}Gruppo di Lettura{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="text-center mb-5">
+        <h1 class="display-4 titologruppo animated fadeIn slower">Gruppo di Lettura</h1>
+        <p class="lead animated fadeIn slower">Ci riuniamo una volta al mese per commentare il libro che abbiamo letto.</p>
+    </div>
+
+    <div class="row mb-4">
+        <div class="col text-center animated fadeIn slower">
+            <h3 class="display-6">Libro del mese</h3>
+            <p class="lead">Per questo mese, è stato scelto <strong>{{ month.titolo }}</strong>. Per maggiori informazioni sul libro clicca 
+                <a href="{{ url_for('libro_show', libro_id = month.id) }}">qui</a></p>
+        </div>
+    </div>
+
+    <div class="row mb-4">
+        <div class="col text-center animated fadeIn slower">
+            <h4 class="display-6">Dove ci troviamo</h4>
+            <p class="lead">Corso Isonzo, 42 - Ferrara 
+                <a href="https://www.google.com/maps/place/Corso+Isonzo,+42,+44121+Ferrara+FE/@44.8368185,11.6077029,16z/data=!3m1!4b1!4m6!3m5!1s0x477e4e73016cb6b7:0x1b17465b8ef03694!8m2!3d44.8368147!4d11.6102778!16s%2Fg%2F11cshg48pw?authuser=0&entry=ttu" target="_blank">
+                    <i class="fa fa-map-marker animated pulse infinite"></i>
+                </a>
+            </p>
+        </div>
+    </div>
+
+    <div class="row text-center">
+        <div class="col-md-12 animated fadeIn slower">
+            <h2 class="display-6">Vuoi venire anche tu?</h2>
+            <p class="lead">Scrivi a <strong>centrocorsoisonzo@gmail.com</strong></p>
+        </div>
+    </div>
+</div>
+{% endblock %}
